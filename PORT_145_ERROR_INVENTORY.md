@@ -73,3 +73,9 @@ Build command:
 ## Progress Log
 
 - 2026-03-04: Created initial consolidated inventory from full solution build log.
+- 2026-03-04: Batch 1/2 fixes applied across ExampleMod APIs.
+  - Fixed: `ExampleZombieThief`, `ExampleRecipes`, `ExampleInteractableProjectile`, `ExampleVanillaConversionWalls`, `MinionBossBody`, `CustomItemDrawingShowcase`, `ExampleWorldGenHookingSystem`, `ExampleSourceDependentTweaks`.
+  - Broad symbol migration in additional files: `Item.NPCtoBanner`/`Item.BannerToItem` -> `BannerSystem.*`, `ImmunityCooldownID.Bosses` -> `BossNoCheese`, `OtherworldlyBoss1` -> `OtherworldBoss1`, `InteractibleByNPCs` -> `InteractableByNPCs`, removed obsolete `ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY` and `DontAttachHideToAlpha` assignments, updated `Main.GetPlayerArmPosition` calls.
+  - Hook alias cleanup for removed symbols: `IL_Player`, `IL_Wiring`, `On_UIWorldListItem`.
+  - Additional API updates: `PlayerDeathReason.LegacyEmpty()` -> `LegacyDefault()`, `NPC.SimpleStrikeNPC` -> `StrikeNPC`.
+  - Build verification is currently blocked by stuck `dotnet` processes in this sandbox session; next step is rerunning a clean `ExampleMod` compile once process control is available.

@@ -66,7 +66,6 @@ namespace ExampleMod.Content.Projectiles
 			ProjectileID.Sets.NeedsUUID[Type] = true;
 
 			// Prevents jitter when stepping up and down blocks and half blocks
-			ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
 		}
 
 		public override void SetDefaults() {

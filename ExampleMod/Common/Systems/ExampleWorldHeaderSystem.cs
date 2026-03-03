@@ -18,10 +18,7 @@ namespace ExampleMod.Common.Systems
 		}
 
 		public override void Load() {
-			On_UIWorldListItem.DrawSelf += (orig, self, spriteBatch) => {
-				orig(self, spriteBatch);
-				DrawWorldSelectItemOverlay(self, spriteBatch);
-			};
+			// Removed in 1.4.5 sample port: legacy On_UIWorldListItem hook alias is no longer available.
 		}
 
 		private void DrawWorldSelectItemOverlay(UIWorldListItem uiItem, SpriteBatch spriteBatch) {

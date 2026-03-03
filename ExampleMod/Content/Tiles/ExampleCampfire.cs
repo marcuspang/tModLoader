@@ -26,7 +26,7 @@ namespace ExampleMod.Content.Tiles
 			Main.tileWaterDeath[Type] = true;
 			Main.tileLavaDeath[Type] = true;
 			TileID.Sets.HasOutlines[Type] = true;
-			TileID.Sets.InteractibleByNPCs[Type] = true;
+			TileID.Sets.InteractableByNPCs[Type] = true;
 			TileID.Sets.Campfire[Type] = true;
 
 			DustType = -1; // No dust when mined.

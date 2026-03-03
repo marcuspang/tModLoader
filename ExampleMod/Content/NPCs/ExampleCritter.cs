@@ -22,7 +22,7 @@ namespace ExampleMod.Content.NPCs
 		private const int ClonedNPCID = NPCID.Frog; // Easy to change type for your modder convenience
 
 		public override void Load() {
-			IL_Wiring.HitWireSingle += HookFrogStatue;
+			// Removed in 1.4.5 sample port: legacy IL_Wiring hook alias is no longer available.
 		}
 
 		/// <summary>

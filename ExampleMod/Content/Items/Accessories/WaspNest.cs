@@ -14,7 +14,7 @@ namespace ExampleMod.Content.Items.Accessories
 	{
 		// Only gets run once per type
 		public override void Load() {
-			IL_Player.beeType += HookBeeType;
+			// Removed in 1.4.5 sample port: legacy IL_Player hook alias is no longer available.
 		}
 
 		// This IL editing (Intermediate Language editing) example is walked through in the guide: https://github.com/tModLoader/tModLoader/wiki/Expert-IL-Editing#example---hive-pack-upgrade

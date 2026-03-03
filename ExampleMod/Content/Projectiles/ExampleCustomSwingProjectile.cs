@@ -74,7 +74,6 @@ namespace ExampleMod.Content.Projectiles
 		private Player Owner => Main.player[Projectile.owner];
 
 		public override void SetStaticDefaults() {
-			ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
 			ProjectileID.Sets.AllowsContactDamageFromJellyfish[Type] = true;
 		}
 
