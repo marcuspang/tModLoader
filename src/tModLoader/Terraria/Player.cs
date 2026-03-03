@@ -17339,6 +17339,9 @@ public partial class Player : Entity, IFixLoadedData
 			OnKillNPC(ref attempt, null);
 	}
 
+	public void ApplyDamageToNPC(NPC npc, int damage, float knockback, int direction, bool crit, DamageClass? damageType = null)
+		=> ApplyDamageToNPC(npc, damage, knockback, direction, crit);
+
 	public void OnKillNPC(ref NPCKillAttempt attempt, object externalKillingBlowSource)
 	{
 		if (Main.myPlayer == whoAmI) {
@@ -17450,7 +17453,7 @@ public partial class Player : Entity, IFixLoadedData
 
 				Rectangle rect4 = nPC2.getRect();
 				if (rect3.Intersects(rect4) && (nPC2.noTileCollide || Collision.CanHit(position, width, height, nPC2.position, nPC2.width, nPC2.height))) {
-					float num3 = 40f * minionDamage;
+					float num3 = minionDamage.ApplyTo(40f);
 					float knockback2 = 5f;
 					int num4 = direction;
 					if (velocity.X < 0f)
@@ -17532,7 +17535,7 @@ public partial class Player : Entity, IFixLoadedData
 					}
 				}
 			}
-			else if ((sliding || velocity.Y == 0f || flag || canJumpAgain_Cloud || canJumpAgain_Sandstorm || canJumpAgain_Blizzard || canJumpAgain_Fart || canJumpAgain_Sail || canJumpAgain_Unicorn || canJumpAgain_Santank || canJumpAgain_WallOfFleshGoat || canJumpAgain_Basilisk || (flag2 && flag3) || (hasDeadCellsDownDash && controlDown && velocity.Y != 0f && !isPerformingJump_DownDash && !mount.Active)) && (releaseJump || (autoJump && (velocity.Y == 0f || sliding)))) {
+				else if ((sliding || velocity.Y == 0f || flag || (hasDeadCellsDownDash && controlDown && velocity.Y != 0f && !isPerformingJump_DownDash && !mount.Active)) && (releaseJump || (autoJump && (velocity.Y == 0f || sliding)))) {
 				if (mount.Active && MountID.Sets.Cart[mount.Type])
 					position.Y -= 0.001f;
 
@@ -17599,8 +17602,9 @@ public partial class Player : Entity, IFixLoadedData
 				}
 				*/
 
-				// Patch context: flag
-				bool attemptDoubleJumps = !flag;
+					// Patch context: flag
+					bool attemptDoubleJumps = !flag;
+					bool flag13 = hasDeadCellsDownDash && controlDown && !isPerformingJump_DownDash && velocity.Y != 0f && !mount.Active;
 
 				canRocket = false;
 				rocketRelease = false;
@@ -18004,7 +18008,7 @@ public partial class Player : Entity, IFixLoadedData
 				}
 
 				if (victimHitbox3.Intersects(npcRect3) && (nPC3.noTileCollide || CanHit(nPC3))) {
-					float num8 = 32f * minionDamage;
+						float num8 = minionDamage.ApplyTo(32f);
 					float num9 = 6f;
 					bool crit3 = false;
 					if (kbGlove)
@@ -24520,7 +24524,7 @@ public partial class Player : Entity, IFixLoadedData
 		bool flag = brokenMirrorBadLuck;
 		if (brokenMirrorBadLuckTime > 0) {
 			brokenMirrorBadLuck = true;
-			brokenMirrorBadLuckTime -= Main.dayRate;
+				brokenMirrorBadLuckTime -= (int)Main.dayRate;
 			if (brokenMirrorBadLuckTime < 0)
 				brokenMirrorBadLuckTime = 0;
 		}
@@ -32322,11 +32326,21 @@ public partial class Player : Entity, IFixLoadedData
 		if (whoAmI == Main.myPlayer && setSquireT2)
 			AddBuff(205, 300);
 
-		stealth = 1f;
-		int num = Damage;
-		double num2 = Main.CalculateDamagePlayersTake(num, statDefense);
-		if (Crit)
-			num *= 2;
+			stealth = 1f;
+			int num = Damage;
+			double num2 = Main.CalculateDamagePlayersTake(num, statDefense);
+			var info = new HurtInfo {
+				DamageSource = damageSource,
+				PvP = pvp,
+				CooldownCounter = cooldownCounter,
+				Dodgeable = dodgeable,
+				SourceDamage = Damage,
+				Damage = (int)Math.Max(num2, 1.0),
+				HitDirection = hitDirection,
+				Knockback = 0f
+			};
+			if (Crit)
+				num *= 2;
 
 		if (whoAmI == Main.myPlayer) {
 			Main.NotifyOfEvent(GameNotificationType.Damage);
@@ -32560,7 +32574,8 @@ public partial class Player : Entity, IFixLoadedData
 			fallStart = (int)(position.Y / 16f);
 		}
 
-		PlayHurtSound();
+			info.Damage = (int)Math.Max(num2, 1.0);
+			PlayHurtSound();
 		eyeHelper.BlinkBecausePlayerGotHurt();
 		if (statLife > 0) {
 			if (info.DustDisabled)
@@ -32595,13 +32610,8 @@ public partial class Player : Entity, IFixLoadedData
 				KillMe(damageSource, num2, hitDirection, pvp);
 		}
 
-		/*
-		if (pvp)
-			num2 = Main.CalculateDamagePlayersTakeInPVP(num, statDefense);
-
-		return num2;
-		*/
-	}
+			return num2;
+		}
 
 	public void PlayHurtSound()
 	{
@@ -33382,8 +33392,8 @@ public partial class Player : Entity, IFixLoadedData
 			settings.HandlePostAction(inv[i]);
 			*/
 
-				if (!settings.NoText)
-					PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, newItem, numTransfered, settings.LongText);
+					if (!settings.NoText)
+						PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, newItem, base.Center, numTransfered, noStack: false, settings.LongText);
 
 			AchievementsHelper.NotifyItemPickup(this, returnItem);
 			settings.HandlePostAction(inv[i]);
@@ -33763,11 +33773,12 @@ public partial class Player : Entity, IFixLoadedData
 				ClearMiningCacheAt(tileTargetX, tileTargetY, 1);
 			}
 
-			Vector3[,] tileDataCaches = PlaceThing_Tiles_GetAutoAccessoryCache();
-			int type = HeldItem.createTile;
-			int style = HeldItem.placeStyle;
-			if (UsingBiomeTorches && type == 4)
-				BiomeTorchPlaceStyle(ref type, ref style);
+				int type = HeldItem.createTile;
+				int style = HeldItem.placeStyle;
+				Point topLeft = new Point(tileTargetX, tileTargetY);
+				Vector3[,] tileDataCaches = PlaceThing_Tiles_GetAutoAccessoryCache(TileObjectData.GetTileData(type, style, 0), topLeft);
+				if (UsingBiomeTorches && type == 4)
+					BiomeTorchPlaceStyle(ref type, ref style);
 
 			if (UsingBiomeTorches && type == 215)
 				BiomeCampfirePlaceStyle(ref type, ref style);
@@ -33779,7 +33790,7 @@ public partial class Player : Entity, IFixLoadedData
 				int num5 = (int)((float)HeldItem.useTime * tileSpeed);
 				SetItemTime(num4 + num5);
 				SetItemAnimation(bestPickaxe.useTime, pickSpeed);
-				PlaceThing_Tiles_PlaceIt_AutoPaintAndActuate(tileDataCaches, type);
+					PlaceThing_Tiles_PlaceIt_AutoPaintAndActuate(tileDataCaches, type, topLeft);
 			}
 		}
 
@@ -34217,14 +34228,15 @@ public partial class Player : Entity, IFixLoadedData
 
 			array = new Vector3[width, height];
 			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					int num = topLeft.X + i;
-					int num2 = topLeft.Y + j;
-					if (Main.tile[num, num2].active())
-						array[i, j] = new Vector3((int)tile.type, tile.frameX, tile.frameY);
-					else
-						array[i, j] = new Vector3(-1f, -1f, -1f);
-				}
+					for (int j = 0; j < height; j++) {
+						int num = topLeft.X + i;
+						int num2 = topLeft.Y + j;
+						Tile tile = Main.tile[num, num2];
+						if (tile.active())
+							array[i, j] = new Vector3((int)tile.type, tile.frameX, tile.frameY);
+						else
+							array[i, j] = new Vector3(-1f, -1f, -1f);
+					}
 			}
 		}
 

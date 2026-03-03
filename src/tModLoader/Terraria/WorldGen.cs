@@ -56079,7 +56079,7 @@ public partial class WorldGen
 		if (tileCache.frameX >= 22 && tileCache.frameY >= 198) {
 			if (Main.netMode != 1) {
 				if (genRand.Next(2) == 0) {
-					if (TreeTypeDropsAcorns(GetTreeType(i, j)) || TileLoader.CanDropAcorn(tile.type)) {
+						if (TreeTypeDropsAcorns(GetTreeType(i, j)) || TileLoader.CanDropAcorn(tileCache.type)) {
 						dropItem = 9;
 						secondaryItem = 27;
 					}
