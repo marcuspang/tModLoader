@@ -79,3 +79,6 @@ Build command:
   - Hook alias cleanup for removed symbols: `IL_Player`, `IL_Wiring`, `On_UIWorldListItem`.
   - Additional API updates: `PlayerDeathReason.LegacyEmpty()` -> `LegacyDefault()`, `NPC.SimpleStrikeNPC` -> `StrikeNPC`.
   - Build verification is currently blocked by stuck `dotnet` processes in this sandbox session; next step is rerunning a clean `ExampleMod` compile once process control is available.
+- 2026-03-04: Batch 3 symbol cleanup.
+  - Removed remaining known 1.4.4-only symbol usages in active ExampleMod sources (excluding `ExampleMod/Old`), including `MountID.Sets.FacePlayersVelocity`.
+  - Verified by symbol sweep that legacy compile-breakers are no longer present in non-Old ExampleMod sources.
