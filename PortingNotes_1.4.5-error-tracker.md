@@ -3,32 +3,30 @@
 ## Current Snapshot
 - Date: 2026-03-03
 - Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
-- Raw error lines: **298**
-- Build summary: **149 errors**, 165 warnings
-- Unique signatures: **117**
+- Raw error lines: **282**
+- Build summary: **141 errors**, 183 warnings
+- Unique signatures: **111**
 - Raw log: `.tmp/terraria_build_errors.log`
 
 ## Error Codes (count)
-- CS0103: 104
+- CS0103: 100
 - CS1061: 30
-- CS1503: 24
+- CS1503: 20
 - CS0117: 20
 - CS1739: 16
 - CS7036: 14
 - CS0122: 14
 - CS0029: 14
-- CS1501: 12
-- CS0266: 10
+- CS1501: 10
 - CS0428: 8
+- CS0266: 8
 - CS0246: 8
 - CS0619: 4
 - CS0426: 4
 - CS1620: 2
-- CS1615: 2
 - CS1593: 2
 - CS0841: 2
 - CS0718: 2
-- CS0200: 2
 - CS0177: 2
 - CS0161: 2
 
@@ -39,7 +37,6 @@
 - Projectile.cs: 16
 - MessageBuffer.cs: 16
 - Map/TeleportPylonsMapLayer.cs: 12
-- Item.cs: 10
 - WorldGen.cs: 8
 - Wiring.cs: 8
 - ModLoader/TileLoader.cs: 8
@@ -53,8 +50,6 @@
 - GameContent/Liquid/LiquidEdgeRenderer.cs: 4
 - WorldGen.TML.cs: 2
 - WorldBuilding/WorldGenerator.cs: 2
-- Utils.cs: 2
-- Utils.TML.cs: 2
 - Social/Steam/WorkshopSocialModule.TML.cs: 2
 - Program.TML.cs: 2
 - Mount.cs: 2
@@ -66,8 +61,6 @@
 - ModLoader/NPCLoader.cs: 2
 - ModLoader/ModPylon.cs: 2
 - ModLoader/ModLoader.cs: 2
-- ModLoader/ModContent.cs: 2
-- ModLoader/IO/WorldIO.cs: 2
 
 ## Progress Log
 - [x] 568 -> 241 after first compatibility and scope/comment fixes.
@@ -75,6 +68,7 @@
 - [x] 204 -> 189 after follow-up fixes (WorldItem, save/load, sound args, clone API).
 - [x] 189 -> 162 after Recipe/WorldGen/list-vs-array compatibility fixes.
 - [x] 162 -> 149 after additional API drift cleanup pass.
+- [x] 149 -> 141 after Item/IO/Utils compatibility fixes.
 - [ ] Next target: Player.cs logic drift + TileSnapshot/TileDrawing clusters.
 
 ## Unique Error Signatures Checklist
@@ -118,10 +112,7 @@ Status legend: `[ ]` pending, `[x]` fixed
 - [ ] CS1739 (2): `The best overload for 'KillTile_DropItems' does not have a parameter named 'includeAllModdedLargeObjectDrops'` in `ModLoader/ModPylon.cs`
 - [ ] CS1739 (2): `The best overload for 'ReloadLanguage' does not have a parameter named 'resetValuesToKeysFirst'` in `ModLoader/ModContent.cs`
 - [ ] CS1620 (2): `Argument 1 must be passed with the 'ref' keyword` in `GameContent/Creative/CreativeUI.TML.cs`
-- [ ] CS1615 (2): `Argument 1 may not be passed with the 'ref' keyword` in `ModLoader/IO/MapIO.cs`
 - [ ] CS1593 (2): `Delegate 'UIElement.DrawEvent' does not take 1 arguments` in `ModLoader/Config/UI/UIModConfigList.cs`
-- [ ] CS1503 (2): `Argument 1: cannot convert from 'Terraria.UI.Chat.TextSnippet[]' to 'System.Collections.Generic.List<Terraria.UI.Chat.TextSnippet>'` in `Utils.cs`
-- [ ] CS1503 (2): `Argument 2: cannot convert from 'Microsoft.Xna.Framework.Vector2' to 'Microsoft.Xna.Framework.Point'` in `Utils.TML.cs`
 - [ ] CS1503 (2): `Argument 3: cannot convert from 'float' to 'int'` in `Projectile.cs`
 - [ ] CS1503 (2): `Argument 1: cannot convert from 'method group' to 'System.Action<int>'` in `ModLoader/ItemLoader.cs`
 - [ ] CS1503 (2): `Argument 1: cannot convert from 'ref bool[]' to 'ref int[]'` in `ModLoader/Default/UnloadedDresser.cs`
@@ -130,7 +121,6 @@ Status legend: `[ ]` pending, `[x]` fixed
 - [ ] CS1503 (2): `Argument 4: cannot convert from 'Terraria.Graphics.TileBatch' to 'Microsoft.Xna.Framework.Graphics.SpriteBatch'` in `GameContent/Drawing/TileDrawing.cs`
 - [ ] CS1501 (2): `No overload for method 'PublishContent' takes 12 arguments` in `Social/Steam/WorkshopSocialModule.TML.cs`
 - [ ] CS1501 (2): `No overload for method 'Move' takes 4 arguments` in `ModLoader/IO/WorldIO.cs`
-- [ ] CS1501 (2): `No overload for method 'Move' takes 4 arguments` in `ModLoader/IO/PlayerIO.cs`
 - [ ] CS1061 (2): `'Tile' does not contain a definition for 'bTileHeader2' and no accessible extension method 'bTileHeader2' accepting a first argument of type 'Tile' could be found (are you missing a using directive or an assembly reference?)` in `Utilities/TileSnapshot.cs`
 - [ ] CS1061 (2): `'Item' does not contain a definition for 'FitsAccessoryVanitySlot' and no accessible extension method 'FitsAccessoryVanitySlot' accepting a first argument of type 'Item' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/ModAccessorySlot.cs`
 - [ ] CS1061 (2): `'LanguageManager' does not contain a definition for 'GetOrRegister' and no accessible extension method 'GetOrRegister' accepting a first argument of type 'LanguageManager' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/LocalizationLoader.cs`
@@ -147,9 +137,7 @@ Status legend: `[ ]` pending, `[x]` fixed
 - [ ] CS0426 (2): `The type name 'ConversionRecursion' does not exist in the type 'WorldGen'` in `ModLoader/WallLoader.cs`
 - [ ] CS0426 (2): `The type name 'ConversionRecursion' does not exist in the type 'WorldGen'` in `ModLoader/TileLoader.cs`
 - [ ] CS0266 (2): `Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)` in `Player.cs`
-- [ ] CS0266 (2): `Cannot implicitly convert type 'int' to 'byte'. An explicit conversion exists (are you missing a cast?)` in `Item.cs`
 - [ ] CS0266 (2): `Cannot implicitly convert type 'int' to 'sbyte'. An explicit conversion exists (are you missing a cast?)` in `GameContent/Drawing/ParticleOrchestrator.cs`
-- [ ] CS0200 (2): `Property or indexer 'Item.active' cannot be assigned to -- it is read only` in `Item.cs`
 - [ ] CS0177 (2): `The out parameter 'value' must be assigned to before control leaves the current method` in `Item.cs`
 - [ ] CS0161 (2): `'Player.Hurt(PlayerDeathReason, int, int, bool, bool, bool, int, bool)': not all code paths return a value` in `Player.cs`
 - [ ] CS0122 (2): `'Chest.Chest(int, int, int, bool, int)' is inaccessible due to its protection level` in `ModLoader/NPCShopDatabase.Test.cs`
@@ -189,8 +177,6 @@ Status legend: `[ ]` pending, `[x]` fixed
 - [ ] CS0103 (2): `The name 'point' does not exist in the current context` in `MessageBuffer.cs`
 - [ ] CS0103 (2): `The name 'num191' does not exist in the current context` in `MessageBuffer.cs`
 - [ ] CS0103 (2): `The name 'bitsByte12' does not exist in the current context` in `MessageBuffer.cs`
-- [ ] CS0103 (2): `The name 'itemToClone' does not exist in the current context` in `Item.cs`
-- [ ] CS0103 (2): `The name 'item' does not exist in the current context` in `Item.cs`
 - [ ] CS0103 (2): `The name 'RestartSpriteBatch' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
 - [ ] CS0103 (2): `The name 'FlushLogData' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
 - [ ] CS0103 (2): `The name 'DrawCallLogData' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`

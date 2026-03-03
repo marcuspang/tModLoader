@@ -47752,7 +47752,7 @@ public partial class Item : IEntitySourceTarget
 	public void ChangeItemType(int to)
 	{
 		bool flag = favorited;
-		byte prefixWeWant = prefix;
+			byte prefixWeWant = (byte)prefix;
 		int num = stack;
 		SetDefaults(to);
 		Prefix(prefixWeWant);
@@ -49762,10 +49762,10 @@ public partial class Item : IEntitySourceTarget
 			}
 		}
 
-		if (itemToClone == null && Type > 0 && cachedItemSpawnsByType[Type] != -1) {
-			cachedItemSpawnsByType[Type] += Stack;
-			return 400;
-		}
+			if (Type > 0 && cachedItemSpawnsByType[Type] != -1) {
+				cachedItemSpawnsByType[Type] += Stack;
+				return 400;
+			}
 
 		int num = ((Main.netMode == 1) ? 400 : PickAnItemSlotToSpawnItemOn());
 		if (Main.item[num].active && num != 400 && Main.netMode == 2)
@@ -49796,7 +49796,7 @@ public partial class Item : IEntitySourceTarget
 		if (ItemSlot.Options.HighlightNewItems && worldItem.type >= 0 && !ItemID.Sets.NeverAppearsAsNewInInventory[worldItem.type])
 			worldItem.newAndShiny = true;
 
-		ItemLoader.OnSpawn(item, source);
+			ItemLoader.OnSpawn(worldItem.inner, source);
 
 		if (Main.netMode == 2 && !noBroadcast)
 			NetMessage.SendData(21, -1, -1, null, num, noGrabDelay.ToInt());
@@ -49919,7 +49919,7 @@ public partial class Item : IEntitySourceTarget
 		dye = 0;
 		shoot = 0;
 		mountType = -1;
-		active = false;
+			// Item.active is read-only in 1.4.5 and is derived from type/stack.
 
 		ModItem = null;
 		_globals = null;
