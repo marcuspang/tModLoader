@@ -790,8 +790,10 @@ public partial class WorldGen
 					continue;
 				}
 
-				Tile tile = new Tile(Main.tile[num6, num7]);
-				Tile tile2 = new Tile(Main.tile[num8, num9]);
+					Tile tile = new Tile();
+					tile.CopyFrom(Main.tile[num6, num7]);
+					Tile tile2 = new Tile();
+					tile2.CopyFrom(Main.tile[num8, num9]);
 				Main.tile[num6, num7].active(tile2.active());
 				Main.tile[num6, num7].type = tile2.type;
 				Main.tile[num6, num7].color(tile2.color());
@@ -863,8 +865,10 @@ public partial class WorldGen
 
 				for (int num17 = 0; num17 < num10; num17++) {
 					for (int num18 = 0; num18 < num11; num18++) {
-						Tile tile3 = new Tile(Main.tile[num12 + num17, num13 + num18]);
-						Tile tile4 = new Tile(Main.tile[num14 + num17, num15 + num18]);
+							Tile tile3 = new Tile();
+							tile3.CopyFrom(Main.tile[num12 + num17, num13 + num18]);
+							Tile tile4 = new Tile();
+							tile4.CopyFrom(Main.tile[num14 + num17, num15 + num18]);
 						Main.tile[num12 + num17, num13 + num18].active(tile4.active());
 						Main.tile[num12 + num17, num13 + num18].type = tile4.type;
 						Main.tile[num12 + num17, num13 + num18].color(tile4.color());
@@ -905,7 +909,8 @@ public partial class WorldGen
 				int num22 = genRand.Next(5, 21);
 				int num23 = num20;
 				int num24 = num21;
-				Tile tile5 = new Tile(Main.tile[num20, num21]);
+					Tile tile5 = new Tile();
+					tile5.CopyFrom(Main.tile[num20, num21]);
 				for (int num25 = 0; num25 < num22; num25++) {
 					num23 += (int)vector2D.X;
 					num24 += (int)vector2D.Y;
@@ -68821,8 +68826,8 @@ public partial class WorldGen
 								break;
 						}
 
-						int num2 = tile2?.frameY ?? (-1);
-						int num3 = tile?.frameY ?? (-1);
+							int num2 = tile2.frameY;
+							int num3 = tile.frameY;
 						bool flag = false;
 						switch (num) {
 							default:
@@ -68853,8 +68858,8 @@ public partial class WorldGen
 						if (up == 165 && flag && flag3)
 							up = num;
 
-						int num4 = tile2?.frameY ?? (-1);
-						int num5 = tile?.frameY ?? (-1);
+							int num4 = tile2.frameY;
+							int num5 = tile.frameY;
 						bool flag4 = false;
 						switch (num) {
 							default:

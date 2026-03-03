@@ -1,404 +1,198 @@
 # 1.4.5 Port Error Tracker
 
-## Baseline
+## Current Snapshot
 - Date: 2026-03-03
 - Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
-- Result: **568 errors**, 165 warnings
+- Raw error lines: **298**
+- Build summary: **149 errors**, 165 warnings
+- Unique signatures: **117**
 - Raw log: `.tmp/terraria_build_errors.log`
 
 ## Error Codes (count)
-- CS0103: 308
-- CS1061: 274
-- CS1503: 112
-- CS0117: 104
-- CS0122: 54
-- CS1656: 44
-- CS0266: 36
-- CS0029: 32
-- CS1501: 30
-- CS7036: 26
-- CS0246: 26
+- CS0103: 104
+- CS1061: 30
+- CS1503: 24
+- CS0117: 20
 - CS1739: 16
-- CS1929: 14
-- CS0127: 12
-- CS0619: 8
+- CS7036: 14
+- CS0122: 14
+- CS0029: 14
+- CS1501: 12
+- CS0266: 10
 - CS0428: 8
-- CS0023: 8
+- CS0246: 8
+- CS0619: 4
 - CS0426: 4
-- CS0120: 4
-- CS8121: 2
 - CS1620: 2
 - CS1615: 2
 - CS1593: 2
 - CS0841: 2
+- CS0718: 2
 - CS0200: 2
 - CS0177: 2
 - CS0161: 2
 
 ## Top Files (count)
-- Player.cs: 228
-- DataStructures/PlayerDrawSet.cs: 84
-- NPC.cs: 48
-- Main.cs: 48
-- UI/ItemSlot.TML.cs: 46
-- WorldGen.cs: 44
-- Projectile.cs: 44
-- ModLoader/BackgroundLoaders.cs: 38
-- DataStructures/PlayerDrawLayers.cs: 32
+- Player.cs: 64
 - GameContent/Drawing/TileDrawing.cs: 28
-- MessageBuffer.cs: 26
-- Item.cs: 22
 - Utilities/TileSnapshot.cs: 20
-- Recipe.TML.cs: 20
-- Graphics/Renderers/FakeFishParticle.cs: 16
-- GameContent/Drawing/ParticleOrchestrator.cs: 16
-- Recipe.cs: 14
-- ModLoader/IO/WorldIO.cs: 14
-- ModLoader/Default/ModAccessorySlotPlayer.cs: 12
+- Projectile.cs: 16
+- MessageBuffer.cs: 16
 - Map/TeleportPylonsMapLayer.cs: 12
-- UI/ItemSorting.cs: 10
-- Player.TML.cs: 10
-- ModLoader/LocalizationLoader.cs: 10
-- GameContent/Tile_Entities/TEDisplayDoll.TML.cs: 10
-- WorldItem.cs: 8
-
-## Unique Error Signatures (worklist)
-Status legend: [ ] pending, [x] fixed
-- [ ] CS1061 in `|` (46 occurrences): DataStructures/PlayerDrawSet.cs
-- [ ] CS1061 in `|` (38 occurrences): DataStructures/PlayerDrawSet.cs
-- [ ] CS0103 in `|` (30 occurrences): UI/ItemSlot.TML.cs
-- [ ] CS0103 in `|` (24 occurrences): NPC.cs
-- [ ] CS1061 in `|` (20 occurrences): DataStructures/PlayerDrawLayers.cs
-- [ ] CS0117 in `|` (18 occurrences): Player.cs
-- [ ] CS1503 in `|` (16 occurrences): Player.cs
-- [ ] CS1503 in `|` (16 occurrences): Player.cs
-- [ ] CS0246 in `|` (14 occurrences): WorldGen.cs
-- [ ] CS1061 in `|` (12 occurrences): ModLoader/Default/ModAccessorySlotPlayer.cs
-- [ ] CS0266 in `|` (12 occurrences): Main.cs
-- [ ] CS0103 in `|` (12 occurrences): NPC.cs
-- [ ] CS0103 in `|` (12 occurrences): MessageBuffer.cs
-- [ ] CS0029 in `|` (12 occurrences): Player.cs
-- [ ] CS1503 in `|` (10 occurrences): WorldGen.cs
-- [ ] CS0127 in `|` (10 occurrences): Player.cs
-- [ ] CS0122 in `|` (10 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS0117 in `|` (10 occurrences): Projectile.cs
-- [ ] CS0103 in `|` (10 occurrences): Player.cs
-- [ ] CS0103 in `|` (10 occurrences): Player.cs
-- [ ] CS0103 in `|` (10 occurrences): Player.cs
-- [ ] CS0103 in `|` (10 occurrences): GameContent/Tile_Entities/TEDisplayDoll.TML.cs
-- [ ] CS1929 in `|` (8 occurrences): ModLoader/IO/TileEntry.cs
-- [ ] CS1656 in `|` (8 occurrences): ModLoader/Default/Patreon/Tantamount.cs
-- [ ] CS1503 in `|` (8 occurrences): UI/ItemSorting.cs
-- [ ] CS1503 in `|` (8 occurrences): ModLoader/Default/UnloadedSupremeFurniture.cs
-- [ ] CS1503 in `|` (8 occurrences): Graphics/Renderers/FakeFishParticle.cs
-- [ ] CS1503 in `|` (8 occurrences): Graphics/Renderers/FakeFishParticle.cs
-- [ ] CS1501 in `|` (8 occurrences): ModLoader/IO/WorldIO.cs
-- [ ] CS1061 in `|` (8 occurrences): UI/ItemSlot.TML.cs
-- [ ] CS1061 in `|` (8 occurrences): ModLoader/IO/ItemIO.cs
-- [ ] CS1061 in `|` (8 occurrences): DataStructures/PlayerDrawLayers.cs
-- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS0103 in `|` (8 occurrences): Player.cs
-- [ ] CS0023 in `|` (8 occurrences): WorldGen.cs
-- [ ] CS7036 in `|` (6 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Squid.cs
-- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Saethar.cs
-- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Remeus.cs
-- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/POCKETS.cs
-- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Glory.cs
-- [ ] CS1501 in `|` (6 occurrences): Player.cs
-- [ ] CS1061 in `|` (6 occurrences): Recipe.TML.cs
-- [ ] CS1061 in `|` (6 occurrences): Projectile.cs
-- [ ] CS1061 in `|` (6 occurrences): Projectile.cs
-- [ ] CS1061 in `|` (6 occurrences): Main.cs
-- [ ] CS0266 in `|` (6 occurrences): IO/WorldFile.cs
-- [ ] CS0103 in `|` (6 occurrences): UI/ItemSlot.TML.cs
-- [ ] CS0103 in `|` (6 occurrences): Player.cs
-- [ ] CS0103 in `|` (6 occurrences): Player.cs
-- [ ] CS0103 in `|` (6 occurrences): Player.cs
-- [ ] CS0103 in `|` (6 occurrences): NPC.cs
-- [ ] CS0103 in `|` (6 occurrences): Map/TeleportPylonsMapLayer.cs
-- [ ] CS0103 in `|` (6 occurrences): Map/TeleportPylonsMapLayer.cs
-- [ ] CS0029 in `|` (6 occurrences): Utilities/TileSnapshot.cs
-- [ ] CS1929 in `|` (4 occurrences): Recipe.TML.cs
-- [ ] CS1739 in `|` (4 occurrences): Projectile.cs
-- [ ] CS1503 in `|` (4 occurrences): Player.cs
-- [ ] CS1503 in `|` (4 occurrences): ModLoader/NPCHeadLoader.cs
-- [ ] CS1501 in `|` (4 occurrences): Item.TML.cs
-- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
-- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
-- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
-- [ ] CS1061 in `|` (4 occurrences): Player.cs
-- [ ] CS1061 in `|` (4 occurrences): ModLoader/Default/Patreon/xAqult.cs
-- [ ] CS1061 in `|` (4 occurrences): ModLoader/CombinedHooks.cs
-- [ ] CS1061 in `|` (4 occurrences): Main.cs
-- [ ] CS1061 in `|` (4 occurrences): Item.cs
-- [ ] CS1061 in `|` (4 occurrences): EquipmentLoadout.cs
-- [ ] CS0428 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0428 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0266 in `|` (4 occurrences): WorldGen.cs
-- [ ] CS0266 in `|` (4 occurrences): DataStructures/PlayerDrawLayers.cs
-- [ ] CS0246 in `|` (4 occurrences): ModLoader/NPCHeadLoader.cs
-- [ ] CS0246 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0117 in `|` (4 occurrences): Recipe.TML.cs
-- [ ] CS0117 in `|` (4 occurrences): ModLoader/LocalizationLoader.cs
-- [ ] CS0117 in `|` (4 occurrences): ModLoader/IO/WorldIO.cs
-- [ ] CS0103 in `|` (4 occurrences): Wiring.cs
-- [ ] CS0103 in `|` (4 occurrences): Wiring.cs
-- [ ] CS0103 in `|` (4 occurrences): Projectile.cs
-- [ ] CS0103 in `|` (4 occurrences): Player.cs
-- [ ] CS0103 in `|` (4 occurrences): Player.cs
-- [ ] CS0103 in `|` (4 occurrences): Map/WorldMap.cs
-- [ ] CS0103 in `|` (4 occurrences): Main.cs
-- [ ] CS0103 in `|` (4 occurrences): Item.cs
-- [ ] CS0103 in `|` (4 occurrences): ID/ProjectileSourceID.cs
-- [ ] CS0103 in `|` (4 occurrences): ID/ProjectileSourceID.cs
-- [ ] CS0103 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0103 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0029 in `|` (4 occurrences): Player.TML.cs
-- [ ] CS8121 in `|` (2 occurrences): WorldGen.cs
-- [ ] CS7036 in `|` (2 occurrences): Player.cs
-- [ ] CS7036 in `|` (2 occurrences): Player.cs
-- [ ] CS7036 in `|` (2 occurrences): Mount.cs
-- [ ] CS7036 in `|` (2 occurrences): ModLoader/PlayerLoader.cs
-- [ ] CS7036 in `|` (2 occurrences): ModLoader/ItemLoader.cs
-- [ ] CS7036 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS7036 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS7036 in `|` (2 occurrences): Localization/LanguageManager.tML.cs
-- [ ] CS7036 in `|` (2 occurrences): GameContent/CraftingRequests.cs
-- [ ] CS7036 in `|` (2 occurrences): DataStructures/EntitySource_CoinRain.cs
-- [ ] CS1929 in `|` (2 occurrences): Recipe.Extensions.cs
-- [ ] CS1739 in `|` (2 occurrences): Projectile.TML.cs
-- [ ] CS1739 in `|` (2 occurrences): Player.cs
-- [ ] CS1739 in `|` (2 occurrences): Player.cs
-- [ ] CS1739 in `|` (2 occurrences): ModLoader/UI/UICommon.cs
-- [ ] CS1739 in `|` (2 occurrences): ModLoader/TileLoader.cs
-- [ ] CS1739 in `|` (2 occurrences): ModLoader/ModPylon.cs
-- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Legs.cs
-- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Head.cs
-- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Body.cs
-- [ ] CS1620 in `|` (2 occurrences): GameContent/Creative/CreativeUI.TML.cs
-- [ ] CS1615 in `|` (2 occurrences): ModLoader/IO/MapIO.cs
-- [ ] CS1593 in `|` (2 occurrences): ModLoader/Config/UI/UIModConfigList.cs
-- [ ] CS1503 in `|` (2 occurrences): Utils.cs
-- [ ] CS1503 in `|` (2 occurrences): Utils.TML.cs
-- [ ] CS1503 in `|` (2 occurrences): Recipe.TML.cs
-- [ ] CS1503 in `|` (2 occurrences): Projectile.cs
-- [ ] CS1503 in `|` (2 occurrences): ModLoader/ItemLoader.cs
-- [ ] CS1503 in `|` (2 occurrences): ModLoader/Default/UnloadedDresser.cs
-- [ ] CS1503 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS1503 in `|` (2 occurrences): Main.cs
-- [ ] CS1503 in `|` (2 occurrences): Main.TML.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS1503 in `|` (2 occurrences): GameContent/Animations/Segments.cs
-- [ ] CS1501 in `|` (2 occurrences): Social/Steam/WorkshopSocialModule.TML.cs
-- [ ] CS1501 in `|` (2 occurrences): Player.cs
-- [ ] CS1501 in `|` (2 occurrences): ModLoader/IO/WorldIO.cs
-- [ ] CS1501 in `|` (2 occurrences): ModLoader/IO/PlayerIO.cs
-- [ ] CS1501 in `|` (2 occurrences): IO/WorldFile.cs
-- [ ] CS1501 in `|` (2 occurrences): GameContent/UI/States/WorkshopPublishInfoStateForMods.TML.cs
-- [ ] CS1061 in `|` (2 occurrences): WorldItem.cs
-- [ ] CS1061 in `|` (2 occurrences): Utilities/TileSnapshot.cs
-- [ ] CS1061 in `|` (2 occurrences): UI/ItemSorting.cs
-- [ ] CS1061 in `|` (2 occurrences): Recipe.cs
-- [ ] CS1061 in `|` (2 occurrences): Recipe.TML.cs
-- [ ] CS1061 in `|` (2 occurrences): Recipe.TML.cs
-- [ ] CS1061 in `|` (2 occurrences): Recipe.Extensions.cs
-- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
-- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
-- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
-- [ ] CS1061 in `|` (2 occurrences): Player.cs
-- [ ] CS1061 in `|` (2 occurrences): Player.cs
-- [ ] CS1061 in `|` (2 occurrences): Netplay.cs
-- [ ] CS1061 in `|` (2 occurrences): NPC.cs
-- [ ] CS1061 in `|` (2 occurrences): NPC.cs
-- [ ] CS1061 in `|` (2 occurrences): Mount.cs
-- [ ] CS1061 in `|` (2 occurrences): ModLoader/ModNet.cs
-- [ ] CS1061 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
-- [ ] CS1061 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
-- [ ] CS1061 in `|` (2 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS1061 in `|` (2 occurrences): ModLoader/ActiveEntityIterator.cs
-- [ ] CS1061 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Main.cs
-- [ ] CS1061 in `|` (2 occurrences): Localization/Language.TML.cs
-- [ ] CS1061 in `|` (2 occurrences): IO/ResourcePack.cs
-- [ ] CS1061 in `|` (2 occurrences): Graphics/Renderers/LegacyPlayerRenderer.cs
-- [ ] CS1061 in `|` (2 occurrences): Graphics/Renderers/LegacyPlayerRenderer.cs
-- [ ] CS1061 in `|` (2 occurrences): GameContent/MinecartDiggerHelper.cs
-- [ ] CS1061 in `|` (2 occurrences): GameContent/BannerSystem.cs
-- [ ] CS1061 in `|` (2 occurrences): GameContent/Animations/Segments.cs
-- [ ] CS1061 in `|` (2 occurrences): DataStructures/ArmorSetBonuses.cs
-- [ ] CS1061 in `|` (2 occurrences): Condition.cs
-- [ ] CS0841 in `|` (2 occurrences): Main.cs
-- [ ] CS0619 in `|` (2 occurrences): ID/SurfaceBackgroundID.cs
-- [ ] CS0619 in `|` (2 occurrences): ID/PlayerVoiceID.cs
-- [ ] CS0619 in `|` (2 occurrences): GameContent/ItemDropRules/StatueMimicItemDropRule.cs
-- [ ] CS0619 in `|` (2 occurrences): GameContent/ItemDropRules/CommonDropScalingWithOnlyBadLuck.cs
-- [ ] CS0426 in `|` (2 occurrences): ModLoader/WallLoader.cs
-- [ ] CS0426 in `|` (2 occurrences): ModLoader/TileLoader.cs
-- [ ] CS0266 in `|` (2 occurrences): WorldItem.cs
-- [ ] CS0266 in `|` (2 occurrences): WorldItem.cs
-- [ ] CS0266 in `|` (2 occurrences): Player.cs
-- [ ] CS0266 in `|` (2 occurrences): Item.cs
-- [ ] CS0266 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
-- [ ] CS0246 in `|` (2 occurrences): WorldItem.cs
-- [ ] CS0246 in `|` (2 occurrences): Item.cs
-- [ ] CS0200 in `|` (2 occurrences): Item.cs
-- [ ] CS0177 in `|` (2 occurrences): Item.cs
-- [ ] CS0161 in `|` (2 occurrences): Player.cs
-- [ ] CS0127 in `|` (2 occurrences): Player.cs
-- [ ] CS0122 in `|` (2 occurrences): Player.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/NPCShopDatabase.Test.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModLoader.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModContent.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
-- [ ] CS0122 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
-- [ ] CS0122 in `|` (2 occurrences): GameContent/Liquid/LiquidEdgeRenderer.cs
-- [ ] CS0122 in `|` (2 occurrences): GameContent/Items/WhipTagEffect.cs
-- [ ] CS0120 in `|` (2 occurrences): Main.cs
-- [ ] CS0120 in `|` (2 occurrences): Main.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): UI/ItemSlot.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): UI/AchievementAdvisor.cs
-- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0117 in `|` (2 occurrences): Projectile.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): Program.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): Player.cs
-- [ ] CS0117 in `|` (2 occurrences): Player.cs
-- [ ] CS0117 in `|` (2 occurrences): Player.cs
-- [ ] CS0117 in `|` (2 occurrences): Player.cs
-- [ ] CS0117 in `|` (2 occurrences): Player.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): NPC.TML.Hit.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/Utilities/NPCSpawnHelper.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/UI/UIModInfo.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/TileLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/TileLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/NPCLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/MusicLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModDust.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModContent.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModContent.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModAchievement.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModAchievement.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/ItemLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/Default/DefaultModMenus.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/Config/UI/UIModConfigList.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/BuffLoader.cs
-- [ ] CS0117 in `|` (2 occurrences): ModLoader/BackgroundLoaders.cs
-- [ ] CS0117 in `|` (2 occurrences): Item.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): Item.TML.cs
-- [ ] CS0117 in `|` (2 occurrences): GameContent/Liquid/LiquidEdgeRenderer.cs
-- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
-- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
-- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
-- [ ] CS0103 in `|` (2 occurrences): WorldGen.TML.cs
-- [ ] CS0103 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
-- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
-- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.cs
-- [ ] CS0103 in `|` (2 occurrences): Player.TML.cs
-- [ ] CS0103 in `|` (2 occurrences): NPC.cs
-- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
-- [ ] CS0103 in `|` (2 occurrences): Main.cs
-- [ ] CS0103 in `|` (2 occurrences): Main.cs
-- [ ] CS0103 in `|` (2 occurrences): Item.cs
-- [ ] CS0103 in `|` (2 occurrences): Item.cs
-- [ ] CS0103 in `|` (2 occurrences): Item.cs
-- [ ] CS0103 in `|` (2 occurrences): ID/DustID.TML.cs
-- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
-- [ ] CS0029 in `|` (2 occurrences): WorldBuilding/WorldGenerator.cs
-- [ ] CS0029 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0029 in `|` (2 occurrences): Recipe.cs
-- [ ] CS0029 in `|` (2 occurrences): Player.TML.cs
-- [ ] CS0029 in `|` (2 occurrences): GameContent/Biomes/CaveHouse/HouseBuilder.cs
+- Item.cs: 10
+- WorldGen.cs: 8
+- Wiring.cs: 8
+- ModLoader/TileLoader.cs: 8
+- ModLoader/NPCHeadLoader.cs: 8
+- Main.cs: 8
+- ModLoader/ModAccessorySlot.cs: 6
+- ModLoader/LocalizationLoader.cs: 4
+- ModLoader/ItemLoader.cs: 4
+- ModLoader/Config/UI/UIModConfigList.cs: 4
+- Map/WorldMap.cs: 4
+- GameContent/Liquid/LiquidEdgeRenderer.cs: 4
+- WorldGen.TML.cs: 2
+- WorldBuilding/WorldGenerator.cs: 2
+- Utils.cs: 2
+- Utils.TML.cs: 2
+- Social/Steam/WorkshopSocialModule.TML.cs: 2
+- Program.TML.cs: 2
+- Mount.cs: 2
+- ModLoader/WallLoader.cs: 2
+- ModLoader/Utilities/NPCSpawnHelper.cs: 2
+- ModLoader/UI/UIModInfo.cs: 2
+- ModLoader/UI/UICommon.cs: 2
+- ModLoader/NPCShopDatabase.Test.cs: 2
+- ModLoader/NPCLoader.cs: 2
+- ModLoader/ModPylon.cs: 2
+- ModLoader/ModLoader.cs: 2
+- ModLoader/ModContent.cs: 2
+- ModLoader/IO/WorldIO.cs: 2
 
 ## Progress Log
-- 2026-03-03 Checkpoint A: `568 -> 444` errors
-  - Fixed unclosed block comment in `Player.cs` around ammo-consumption logic that was swallowing multiple `Player` methods (`GetImmuneAlpha*`, `TryDroppingSingleItem`, `PickTile*`, `CopyVisuals`, `addDPS`, etc).
-- 2026-03-03 Checkpoint B: `444 -> 421` errors
-  - Added compatibility members/aliases in `Player.cs`:
-    - `whipUseTimeMultiplier` field
-    - `revolverCritChanceBonus` field
-    - `adjWater` alias property -> `adjWaterSource`
-    - `GetItemSource_InventoryOverflow()` redirect
-  - Updated stale API usage:
-    - `Condition.NearWater` now uses `adjWaterSource`
-    - `Item.GetItemSource_Misc` and `WorldItem.GetItemSource_Misc` now use `EntitySource_Misc`
-    - `EntitySource_CoinRain` now calls `AEntitySource_Tile(..., context)` ctor
-    - `SetFactory` constructor calls updated in `SurfaceBackgroundID`, `PlayerVoiceID`, and `DustID.TML`
-    - Added missing `ProjectileSourceID` constants for `StormTigerTierSwap` and `AbigailTierSwap`
-    - `LegacyPlayerRenderer` head-only path now uses existing `BoringSetup`
-  - Fixed small type mismatches in `WorldItem.cs` (`short`/`int` casts and dayRate division cast)
+- [x] 568 -> 241 after first compatibility and scope/comment fixes.
+- [x] 241 -> 204 after Player/Main/NPC API drift patch batch.
+- [x] 204 -> 189 after follow-up fixes (WorldItem, save/load, sound args, clone API).
+- [x] 189 -> 162 after Recipe/WorldGen/list-vs-array compatibility fixes.
+- [x] 162 -> 149 after additional API drift cleanup pass.
+- [ ] Next target: Player.cs logic drift + TileSnapshot/TileDrawing clusters.
 
-## Current Baseline (After Checkpoint B)
-- Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
-- Result: **421 errors**
-- Error signatures remaining: **231**
-- Latest log: `.tmp/terraria_build_errors.log`
-- 2026-03-03 Checkpoint C: `421 -> 413` errors
-  - Fixed `WorldItem.makeNPC` getter cast and `PlayerDrawLayers` `sbyte` casts.
-  - Disabled stale `TEDisplayDoll.TML.cs` overrides that referenced removed `_items` backing field.
-- 2026-03-03 Checkpoint D: `413 -> 392` errors
-  - Updated 1.4.5 API drift in `WorldGen`, `WorldFile`, `Segments`, `WorkshopPublishInfoStateForMods.TML`, `FakeFishParticle`, and `ParticleOrchestrator`.
-  - Replaced old `SoundEngine.PlaySound` call shapes with `SoundStyle` + position usage.
-  - Updated `WorldGen.KillTile_GetTileDustAmount` invocation to pass tile coordinates.
-
-## Current Baseline (After Checkpoint D)
-- Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
-- Result: **392 errors**
-- Error signatures remaining: **216**
-- Latest log: `.tmp/terraria_build_errors.log`
-- 2026-03-03 Checkpoint E: `392 -> 332` errors
-  - Restored compatibility members/APIs across core types:
-    - `Main.DamageVar` overloads + `Main.availableRecipeY`
-    - `Recipe.FindRecipes()` compatibility stub
-    - `TileID.Sets.CountsAsHoney/Lava/ShimmerForCrafting`
-    - `MusicID.Title` alias + `MusicID.Search`
-    - `DustID.Search`
-    - `GameCulture.KnownCultures`
-    - `AchievementManager` static compatibility members (`FinishSetup`, `Unload`, vanilla markers)
-    - `EntitySource_ByProjectileSourceId` shim
-  - Fixed drift in item and slot helpers:
-    - `Item.TML` `NewItem` overload implementation and magic/summon prefix set usage
-    - `ItemSlot.TML` local accessory swap slot declaration and lock helper
+## Unique Error Signatures Checklist
+Status legend: `[ ]` pending, `[x]` fixed
+- [ ] CS0103 (8): `The name 'info' does not exist in the current context` in `Player.cs`
+- [ ] CS1501 (6): `No overload for method 'ApplyDamageToNPC' takes 6 arguments` in `Player.cs`
+- [ ] CS0103 (6): `The name 'tile' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (6): `The name 'num' does not exist in the current context` in `Map/TeleportPylonsMapLayer.cs`
+- [ ] CS0103 (6): `The name 'info' does not exist in the current context` in `Map/TeleportPylonsMapLayer.cs`
+- [ ] CS0029 (6): `Cannot implicitly convert type 'Terraria.Tilemap' to 'Terraria.Tile[*,*]'` in `Utilities/TileSnapshot.cs`
+- [ ] CS1739 (4): `The best overload for 'Hurt' does not have a parameter named 'armorPenetration'` in `Projectile.cs`
+- [ ] CS1503 (4): `Argument 1: cannot convert from 'ref Terraria.Graphics.Renderers.OutlinedTextureRenderer' to 'ref NPCHeadRenderer'` in `ModLoader/NPCHeadLoader.cs`
+- [ ] CS1503 (4): `Argument 3: cannot convert from 'int' to 'ushort'` in `MessageBuffer.cs`
+- [ ] CS1061 (4): `'Tile' does not contain a definition for 'sTileHeader' and no accessible extension method 'sTileHeader' accepting a first argument of type 'Tile' could be found (are you missing a using directive or an assembly reference?)` in `Utilities/TileSnapshot.cs`
+- [ ] CS1061 (4): `'Tile' does not contain a definition for 'bTileHeader3' and no accessible extension method 'bTileHeader3' accepting a first argument of type 'Tile' could be found (are you missing a using directive or an assembly reference?)` in `Utilities/TileSnapshot.cs`
+- [ ] CS1061 (4): `'Tile' does not contain a definition for 'bTileHeader' and no accessible extension method 'bTileHeader' accepting a first argument of type 'Tile' could be found (are you missing a using directive or an assembly reference?)` in `Utilities/TileSnapshot.cs`
+- [ ] CS0428 (4): `Cannot convert method group 'Width' to non-delegate type 'int'. Did you intend to invoke the method?` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0428 (4): `Cannot convert method group 'Height' to non-delegate type 'int'. Did you intend to invoke the method?` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0266 (4): `Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)` in `WorldGen.cs`
+- [ ] CS0246 (4): `The type or namespace name 'NPCHeadRenderer' could not be found (are you missing a using directive or an assembly reference?)` in `ModLoader/NPCHeadLoader.cs`
+- [ ] CS0246 (4): `The type or namespace name 'TileObjectData' could not be found (are you missing a using directive or an assembly reference?)` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0103 (4): `The name 'num122' does not exist in the current context` in `Wiring.cs`
+- [ ] CS0103 (4): `The name 'num118' does not exist in the current context` in `Wiring.cs`
+- [ ] CS0103 (4): `The name 'modifiers' does not exist in the current context` in `Projectile.cs`
+- [ ] CS0103 (4): `The name 'flag13' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (4): `The name 'text' does not exist in the current context` in `Map/WorldMap.cs`
+- [ ] CS0103 (4): `The name 'TileObjectData' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0103 (4): `The name 'RestartLayeredBatch' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0029 (4): `Cannot implicitly convert type 'Terraria.ModLoader.StatModifier' to 'float'` in `Player.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'topLeft' of 'Player.PlaceThing_Tiles_PlaceIt_AutoPaintAndActuate(Vector3[*,*], int, Point)'` in `Player.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'data' of 'Player.PlaceThing_Tiles_GetAutoAccessoryCache(TileObjectData, Point)'` in `Player.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'x' of 'WorldGen.KillTile_GetTileDustAmount(bool, Tile, int, int)'` in `Mount.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'Type' of 'Item.SetDefaults(int, ItemVariant)'` in `ModLoader/ItemLoader.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'knockBack' of 'NPC.StrikeNPC(int, float, int, bool, bool, bool, int)'` in `MessageBuffer.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'Damage' of 'Player.Hurt(PlayerDeathReason, int, int, bool, bool, bool, int, bool)'` in `MessageBuffer.cs`
+- [ ] CS7036 (2): `There is no argument given that corresponds to the required parameter 'consumedItems' of 'RecipeItemCreationContext.RecipeItemCreationContext(Recipe, List<Item>, Item)'` in `GameContent/CraftingRequests.cs`
+- [ ] CS1739 (2): `The best overload for 'NewText' does not have a parameter named 'noStack'` in `Player.cs`
+- [ ] CS1739 (2): `The best overload for 'ApplyDamageToNPC' does not have a parameter named 'damageType'` in `Player.cs`
+- [ ] CS1739 (2): `The best overload for 'SetDefaults' does not have a parameter named 'noMatCheck'` in `ModLoader/UI/UICommon.cs`
+- [ ] CS1739 (2): `The best overload for 'KillTile_DropItems' does not have a parameter named 'includeAllModdedLargeObjectDrops'` in `ModLoader/TileLoader.cs`
+- [ ] CS1739 (2): `The best overload for 'KillTile_DropItems' does not have a parameter named 'includeAllModdedLargeObjectDrops'` in `ModLoader/ModPylon.cs`
+- [ ] CS1739 (2): `The best overload for 'ReloadLanguage' does not have a parameter named 'resetValuesToKeysFirst'` in `ModLoader/ModContent.cs`
+- [ ] CS1620 (2): `Argument 1 must be passed with the 'ref' keyword` in `GameContent/Creative/CreativeUI.TML.cs`
+- [ ] CS1615 (2): `Argument 1 may not be passed with the 'ref' keyword` in `ModLoader/IO/MapIO.cs`
+- [ ] CS1593 (2): `Delegate 'UIElement.DrawEvent' does not take 1 arguments` in `ModLoader/Config/UI/UIModConfigList.cs`
+- [ ] CS1503 (2): `Argument 1: cannot convert from 'Terraria.UI.Chat.TextSnippet[]' to 'System.Collections.Generic.List<Terraria.UI.Chat.TextSnippet>'` in `Utils.cs`
+- [ ] CS1503 (2): `Argument 2: cannot convert from 'Microsoft.Xna.Framework.Vector2' to 'Microsoft.Xna.Framework.Point'` in `Utils.TML.cs`
+- [ ] CS1503 (2): `Argument 3: cannot convert from 'float' to 'int'` in `Projectile.cs`
+- [ ] CS1503 (2): `Argument 1: cannot convert from 'method group' to 'System.Action<int>'` in `ModLoader/ItemLoader.cs`
+- [ ] CS1503 (2): `Argument 1: cannot convert from 'ref bool[]' to 'ref int[]'` in `ModLoader/Default/UnloadedDresser.cs`
+- [ ] CS1503 (2): `Argument 3: cannot convert from 'float' to 'Terraria.Audio.SoundUpdateCallback?'` in `MessageBuffer.cs`
+- [ ] CS1503 (2): `Argument 1: cannot convert from 'int' to 'Terraria.NPC'` in `Main.cs`
+- [ ] CS1503 (2): `Argument 4: cannot convert from 'Terraria.Graphics.TileBatch' to 'Microsoft.Xna.Framework.Graphics.SpriteBatch'` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS1501 (2): `No overload for method 'PublishContent' takes 12 arguments` in `Social/Steam/WorkshopSocialModule.TML.cs`
+- [ ] CS1501 (2): `No overload for method 'Move' takes 4 arguments` in `ModLoader/IO/WorldIO.cs`
+- [ ] CS1501 (2): `No overload for method 'Move' takes 4 arguments` in `ModLoader/IO/PlayerIO.cs`
+- [ ] CS1061 (2): `'Tile' does not contain a definition for 'bTileHeader2' and no accessible extension method 'bTileHeader2' accepting a first argument of type 'Tile' could be found (are you missing a using directive or an assembly reference?)` in `Utilities/TileSnapshot.cs`
+- [ ] CS1061 (2): `'Item' does not contain a definition for 'FitsAccessoryVanitySlot' and no accessible extension method 'FitsAccessoryVanitySlot' accepting a first argument of type 'Item' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/ModAccessorySlot.cs`
+- [ ] CS1061 (2): `'LanguageManager' does not contain a definition for 'GetOrRegister' and no accessible extension method 'GetOrRegister' accepting a first argument of type 'LanguageManager' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/LocalizationLoader.cs`
+- [ ] CS1061 (2): `'Main' does not contain a definition for 'screenOff' and no accessible extension method 'screenOff' accepting a first argument of type 'Main' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/BackgroundLoaders.cs`
+- [ ] CS1061 (2): `'T' does not contain a definition for 'active' and no accessible extension method 'active' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)` in `ModLoader/ActiveEntityIterator.cs`
+- [ ] CS1061 (2): `'TileDrawing' does not contain a definition for 'End' and no accessible extension method 'End' accepting a first argument of type 'TileDrawing' could be found (are you missing a using directive or an assembly reference?)` in `Main.cs`
+- [ ] CS1061 (2): `'TileDrawing' does not contain a definition for 'Begin' and no accessible extension method 'Begin' accepting a first argument of type 'TileDrawing' could be found (are you missing a using directive or an assembly reference?)` in `Main.cs`
+- [ ] CS1061 (2): `'LanguageManager' does not contain a definition for 'GetOrRegister' and no accessible extension method 'GetOrRegister' accepting a first argument of type 'LanguageManager' could be found (are you missing a using directive or an assembly reference?)` in `Localization/Language.TML.cs`
+- [ ] CS1061 (2): `'AssetReaderCollection' does not contain a definition for 'Read' and no accessible extension method 'Read' accepting a first argument of type 'AssetReaderCollection' could be found (are you missing a using directive or an assembly reference?)` in `IO/ResourcePack.cs`
+- [ ] CS0841 (2): `Cannot use local variable 'spriteEffects' before it is declared` in `Main.cs`
+- [ ] CS0718 (2): `'MusicID': static types cannot be used as type arguments` in `ID/MusicID.cs`
+- [ ] CS0619 (2): `'CommonCode.DropItemFromNPC(NPC, int, int, bool)' is obsolete: 'Use DropItem(DropAttemptInfo, ...)'` in `GameContent/ItemDropRules/StatueMimicItemDropRule.cs`
+- [ ] CS0619 (2): `'CommonCode.DropItemFromNPC(NPC, int, int, bool)' is obsolete: 'Use DropItem(DropAttemptInfo, ...)'` in `GameContent/ItemDropRules/CommonDropScalingWithOnlyBadLuck.cs`
+- [ ] CS0426 (2): `The type name 'ConversionRecursion' does not exist in the type 'WorldGen'` in `ModLoader/WallLoader.cs`
+- [ ] CS0426 (2): `The type name 'ConversionRecursion' does not exist in the type 'WorldGen'` in `ModLoader/TileLoader.cs`
+- [ ] CS0266 (2): `Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)` in `Player.cs`
+- [ ] CS0266 (2): `Cannot implicitly convert type 'int' to 'byte'. An explicit conversion exists (are you missing a cast?)` in `Item.cs`
+- [ ] CS0266 (2): `Cannot implicitly convert type 'int' to 'sbyte'. An explicit conversion exists (are you missing a cast?)` in `GameContent/Drawing/ParticleOrchestrator.cs`
+- [ ] CS0200 (2): `Property or indexer 'Item.active' cannot be assigned to -- it is read only` in `Item.cs`
+- [ ] CS0177 (2): `The out parameter 'value' must be assigned to before control leaves the current method` in `Item.cs`
+- [ ] CS0161 (2): `'Player.Hurt(PlayerDeathReason, int, int, bool, bool, bool, int, bool)': not all code paths return a value` in `Player.cs`
+- [ ] CS0122 (2): `'Chest.Chest(int, int, int, bool, int)' is inaccessible due to its protection level` in `ModLoader/NPCShopDatabase.Test.cs`
+- [ ] CS0122 (2): `'Main.OnceFailedLoadingAnAsset(string, Exception)' is inaccessible due to its protection level` in `ModLoader/ModLoader.cs`
+- [ ] CS0122 (2): `'Player.GrantArmorBenefits(Item)' is inaccessible due to its protection level` in `ModLoader/ModAccessorySlot.cs`
+- [ ] CS0122 (2): `'Player.ApplyEquipFunctional(int, Item)' is inaccessible due to its protection level` in `ModLoader/ModAccessorySlot.cs`
+- [ ] CS0122 (2): `'LanguageManager._localizedTexts' is inaccessible due to its protection level` in `ModLoader/LocalizationLoader.cs`
+- [ ] CS0122 (2): `'Main.tileTarget' is inaccessible due to its protection level` in `GameContent/Liquid/LiquidEdgeRenderer.cs`
+- [ ] CS0122 (2): `'NPCID.Sets.DebuffImmunitySets' is inaccessible due to its protection level` in `GameContent/Items/WhipTagEffect.cs`
+- [ ] CS0117 (2): `'NativeLibraries' does not contain a definition for 'CheckNativeFAudioDependencies'` in `Program.TML.cs`
+- [ ] CS0117 (2): `'Main' does not contain a definition for 'CalculateDamagePlayersTake'` in `Player.cs`
+- [ ] CS0117 (2): `'NPC' does not contain a definition for 'Spawning_SandstoneCheck'` in `ModLoader/Utilities/NPCSpawnHelper.cs`
+- [ ] CS0117 (2): `'UILinkPointNavigator.Shortcuts' does not contain a definition for 'BackButtonGoto'` in `ModLoader/UI/UIModInfo.cs`
+- [ ] CS0117 (2): `'Main' does not contain a definition for 'SetupAllBlockMerge'` in `ModLoader/TileLoader.cs`
+- [ ] CS0117 (2): `'BiomeConversionID' does not contain a definition for 'Chlorophyte'` in `ModLoader/TileLoader.cs`
+- [ ] CS0117 (2): `'NPC' does not contain a definition for 'killCount'` in `ModLoader/NPCLoader.cs`
+- [ ] CS0117 (2): `'UILinkPointNavigator.Shortcuts' does not contain a definition for 'BackButtonGoto'` in `ModLoader/Config/UI/UIModConfigList.cs`
+- [ ] CS0117 (2): `'Main' does not contain a definition for 'Initialize_BuffDataFromMountData'` in `ModLoader/BuffLoader.cs`
+- [ ] CS0117 (2): `'Main' does not contain a definition for 'sceneTilePos'` in `GameContent/Liquid/LiquidEdgeRenderer.cs`
+- [ ] CS0103 (2): `The name 'tile' does not exist in the current context` in `WorldGen.cs`
+- [ ] CS0103 (2): `The name 'includeAllModdedLargeObjectDrops' does not exist in the current context` in `WorldGen.cs`
+- [ ] CS0103 (2): `The name 'TryKillingTreesAboveIfTheyWouldBecomeInvalid' does not exist in the current context` in `WorldGen.TML.cs`
+- [ ] CS0103 (2): `The name 'strike' does not exist in the current context` in `Projectile.cs`
+- [ ] CS0103 (2): `The name 'nPC' does not exist in the current context` in `Projectile.cs`
+- [ ] CS0103 (2): `The name 'VanillaWhipSettings' does not exist in the current context` in `Projectile.cs`
+- [ ] CS0103 (2): `The name 'flag3' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'flag2' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_WallOfFleshGoat' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Unicorn' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Santank' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Sandstorm' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Sail' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Fart' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Cloud' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Blizzard' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'canJumpAgain_Basilisk' does not exist in the current context` in `Player.cs`
+- [ ] CS0103 (2): `The name 'point' does not exist in the current context` in `MessageBuffer.cs`
+- [ ] CS0103 (2): `The name 'num191' does not exist in the current context` in `MessageBuffer.cs`
+- [ ] CS0103 (2): `The name 'bitsByte12' does not exist in the current context` in `MessageBuffer.cs`
+- [ ] CS0103 (2): `The name 'itemToClone' does not exist in the current context` in `Item.cs`
+- [ ] CS0103 (2): `The name 'item' does not exist in the current context` in `Item.cs`
+- [ ] CS0103 (2): `The name 'RestartSpriteBatch' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0103 (2): `The name 'FlushLogData' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0103 (2): `The name 'DrawCallLogData' does not exist in the current context` in `GameContent/Drawing/TileDrawing.cs`
+- [ ] CS0029 (2): `Cannot implicitly convert type 'Terraria.Tilemap' to 'Terraria.Tile[*,*]'` in `WorldBuilding/WorldGenerator.cs`
+- [ ] CS0029 (2): `Cannot implicitly convert type 'Terraria.Tilemap' to 'Terraria.Tile[*,*]'` in `GameContent/Biomes/CaveHouse/HouseBuilder.cs`

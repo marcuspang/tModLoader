@@ -25,11 +25,14 @@ using Terraria.ModLoader.Default;
 using Terraria.ModLoader.Config;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Terraria.Testing;
 
 namespace Terraria;
 
 public partial class Main
 {
+	public const int BG_STYLES_COUNT = 16;
+
 	/// <summary>
 	/// Legacy compatibility shim. Use <c>instance.IsActive</c> instead.
 	/// </summary>
@@ -648,7 +651,7 @@ public partial class Main
 				var newsColor = newsMouseOver && newsURL != null ? highVersionColor : menuColor;
 				ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.MouseText.Value, latestNewsText, newsPosition - newsSize, newsColor, 0f, Vector2.Zero, newsScales);
 
-				if (newsMouseOver && mouseLeftRelease && mouseLeft && hasFocus && newsURL != null) {
+				if (newsMouseOver && mouseLeftRelease && mouseLeft && Main.instance.IsActive && newsURL != null) {
 					SoundEngine.PlaySound(SoundID.MenuOpen);
 					Utils.OpenToURL(newsURL);
 					newsIsNew = false;

@@ -8232,6 +8232,7 @@ public partial class Player : Entity, IFixLoadedData
 
 	// Internal redirects:
 	internal IEntitySource GetProjectileSource_Item(Item item) => GetSource_ItemUse(item);
+	internal IEntitySource GetItemSource_Item(Item item) => GetSource_ItemUse(item);
 	internal IEntitySource GetItemSource_OpenItem(int itemType) => GetSource_OpenItem(itemType);
 	internal IEntitySource GetItemSource_Death() => GetSource_Death();
 	internal IEntitySource GetItemSource_InventoryOverflow() => GetSource_Misc(context: ItemSourceID.ToContextString(ItemSourceID.InventoryOverflow));
@@ -17361,6 +17362,18 @@ public partial class Player : Entity, IFixLoadedData
 		return true;
 	}
 
+	public void ApplyBannerDefenseBuff(int bannerType, ref HurtModifiers modifiers)
+	{
+		if (GetBannerBuffEffect(bannerType, out var effect))
+			modifiers.IncomingDamageMultiplier *= effect.DamageReceived.Sample(Main.Difficulty);
+	}
+
+	public void ApplyBannerDefenseBuff(NPC npc, ref HurtModifiers modifiers)
+	{
+		if (npc != null)
+			ApplyBannerDefenseBuff(BannerSystem.NPCtoBanner(npc.BannerID()), ref modifiers);
+	}
+
 	public void GiveImmuneTimeForCollisionAttack(int time)
 	{
 		if (_timeSinceLastImmuneGet <= 20)
@@ -23990,9 +24003,7 @@ public partial class Player : Entity, IFixLoadedData
 		float lerpValue = Utils.GetLerpValue(0f, 120f, sunScorchCounter, clamped: true);
 		ActiveSound activeSound = SoundEngine.GetActiveSound(_sizzleAudioHandle);
 		if (activeSound == null && lerpValue != 0f) {
-			SoundPlayOverrides overrides = default(SoundPlayOverrides);
-			overrides.Volume = lerpValue;
-			_sizzleAudioHandle = SoundEngine.PlayTrackedLoopedSound(SoundID.VampireSizzle, base.Center, new VampireSizzleTracker(whoAmI).IsActiveAndInGame, overrides);
+			_sizzleAudioHandle = SoundEngine.PlayTrackedLoopedSound(SoundID.VampireSizzle, base.Center, new VampireSizzleTracker(whoAmI).IsActiveAndInGame);
 			activeSound = SoundEngine.GetActiveSound(_sizzleAudioHandle);
 		}
 
@@ -32720,13 +32731,13 @@ public partial class Player : Entity, IFixLoadedData
 		float pitchOffset = Utils.Remap(voicePitchOffset, -1f, 1f, 0f - num, num);
 		switch (voiceVariant) {
 			case 1:
-				SoundEngine.PlaySound(1, vector, 1, pitchOffset);
+				SoundEngine.PlaySound(1, (int)vector.X, (int)vector.Y, 1, 1f, pitchOffset);
 				break;
 			case 2:
-				SoundEngine.PlaySound(20, vector, 1, pitchOffset);
+				SoundEngine.PlaySound(20, (int)vector.X, (int)vector.Y, 1, 1f, pitchOffset);
 				break;
 			case 3:
-				SoundEngine.PlaySound(SoundID.DefaultPlayerHurt, vector, pitchOffset);
+				SoundEngine.PlaySound(SoundID.DefaultPlayerHurt.WithPitchOffset(pitchOffset), vector);
 				break;
 		}
 	}
@@ -32845,7 +32856,7 @@ public partial class Player : Entity, IFixLoadedData
 		if (whoAmI == Main.myPlayer)
 			Main.NotifyOfEvent(GameNotificationType.SpawnOrDeath);
 
-		if (whoAmI != Main.myPlayer && team == Main.LocalPlayer.team && damageSource.SourceProjectileType.HasValue && ProjectileID.Sets.IsAGravestone[damageSource.SourceProjectileType.Value])
+		if (whoAmI != Main.myPlayer && team == Main.LocalPlayer.team && damageSource.SourceProjectileType >= 0 && ProjectileID.Sets.IsAGravestone[damageSource.SourceProjectileType])
 			AchievementsHelper.NotifyProgressionEvent(36);
 
 		if (pvpDeath)
@@ -39530,17 +39541,17 @@ public partial class Player : Entity, IFixLoadedData
 			pitchOffset = (float)Main.rand.Next(-50, 51) * 0.01f;
 
 		if (range > num2 * 5f)
-			SoundEngine.PlaySound(49, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(49, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 		else if (range > num2 * 4f)
-			SoundEngine.PlaySound(48, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(48, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 		else if (range > num2 * 3f)
-			SoundEngine.PlaySound(47, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(47, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 		else if (range > num2 * 2f)
-			SoundEngine.PlaySound(51, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(51, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 		else if (range > num2 * 1f)
-			SoundEngine.PlaySound(52, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(52, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 		else
-			SoundEngine.PlaySound(50, base.Center, 1, pitchOffset);
+			SoundEngine.PlaySound(50, (int)base.Center.X, (int)base.Center.Y, 1, 1f, pitchOffset);
 	}
 
 	public void PlayDrums(float range)
@@ -43792,7 +43803,7 @@ public partial class Player : Entity, IFixLoadedData
 				NetMessage.SendData(152, -1, -1, null, whoAmI);
 
 			if (whoAmI == Main.myPlayer || !flag3)
-				SoundEngine.PlaySound(sItem.UseSound, base.Center, sItem.useSoundPitch);
+				SoundEngine.PlaySound(sItem.UseSound?.WithPitchOffset(sItem.useSoundPitch), base.Center);
 		}
 	}
 
@@ -45150,26 +45161,17 @@ public partial class Player : Entity, IFixLoadedData
 	public float GetWeaponDamageMultiplier(Item item)
 	{
 		if (item.melee)
-			return meleeDamage;
+			return meleeDamage.ApplyTo(1f);
 
 		if (item.ranged) {
-			if (AmmoID.Sets.IsArrow[item.useAmmo] || AmmoID.Sets.IsArrow[item.ammo])
-				return bowEffectiveDamage;
-
-			if (AmmoID.Sets.IsBullet[item.useAmmo] || AmmoID.Sets.IsBullet[item.ammo])
-				return gunEffectiveDamage;
-
-			if (AmmoID.Sets.IsSpecialist[item.useAmmo] || AmmoID.Sets.IsSpecialist[item.ammo] || ItemID.Sets.IsRangedSpecialistWeapon[item.type])
-				return specialistEffectiveDamage;
-
-			return rangedDamage;
+			return rangedDamage.ApplyTo(1f);
 		}
 
 		if (item.magic)
-			return magicDamage;
+			return magicDamage.ApplyTo(1f);
 
 		if (item.summon)
-			return minionDamage;
+			return minionDamage.ApplyTo(1f);
 
 		return 1f;
 	}
@@ -46386,7 +46388,8 @@ public partial class Player : Entity, IFixLoadedData
 			SocialAPI.Cloud.Write(playerFile.Path, ((MemoryStream)stream).ToArray());
 		*/
 
-		return ((MemoryStream)stream).ToArray();
+			FileUtilities.WriteAllBytes(path, ((MemoryStream)stream).ToArray(), isCloudSave);
+			return;
 	}
 
 	private static void SavePlayerFile_Write(PlayerFileData playerFile, byte[] plrData, TagCompound tplrData)
@@ -46743,7 +46746,7 @@ public partial class Player : Entity, IFixLoadedData
 				}
 
 				Deserialize(playerFileData, player, binaryReader, tplrData, num, out gotToReadName); // Added tplrData argument
-				if (player.lastTimePlayerWasSaved == 0L && !cloudSave)
+				if (player.lastTimePlayerWasSaved == 0L && !playerFileData.IsCloudSave)
 					player.lastTimePlayerWasSaved = File.GetLastWriteTimeUtc(playerPath).ToBinary();
 			}
 
