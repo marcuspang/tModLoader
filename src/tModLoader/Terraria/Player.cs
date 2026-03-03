@@ -33382,8 +33382,8 @@ public partial class Player : Entity, IFixLoadedData
 			settings.HandlePostAction(inv[i]);
 			*/
 
-			if (!settings.NoText)
-				PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, newItem, numTransfered, noStack: false, settings.LongText);
+				if (!settings.NoText)
+					PopupText.NewText(PopupTextContext.ItemPickupToVoidContainer, newItem, numTransfered, settings.LongText);
 
 			AchievementsHelper.NotifyItemPickup(this, returnItem);
 			settings.HandlePostAction(inv[i]);

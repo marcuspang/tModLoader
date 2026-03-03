@@ -87,6 +87,17 @@ public partial class Main
 		return (int)Math.Round(varied);
 	}
 
+	public static double CalculateDamagePlayersTake(int damage, int defense)
+	{
+		double result = damage - defense * 0.5;
+		if (masterMode)
+			result = damage - defense;
+		else if (expertMode)
+			result = damage - defense * 0.75;
+
+		return Math.Max(result, 1.0);
+	}
+
 	public static int soundError;
 	public static int ambientError;
 	public static float[] availableRecipeY = Array.Empty<float>();

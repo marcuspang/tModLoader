@@ -60607,7 +60607,7 @@ public partial class WorldGen
 		double num2 = 6E-05f * (float)worldUpdateRate;
 		double num3 = 1.5E-05f * (float)worldUpdateRate;
 		double num4 = 2.5E-05f * (float)worldUpdateRate;
-		npcSpawnPeriod = 20 * worldUpdateRate;
+			npcSpawnPeriod = (int)(20 * worldUpdateRate);
 		UpdatePrioritizedTownNPC();
 		CheckForHousesNearAPlayer();
 		if (Main.isThereAWorldSurface) {
@@ -61050,7 +61050,7 @@ public partial class WorldGen
 
 	public static int GetWorldUpdateRate()
 	{
-		int result = Math.Min(Main.desiredWorldTilesUpdateRate, 24);
+			int result = (int)Math.Min(Main.desiredWorldTilesUpdateRate, 24);
 		if (CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
 			result = 0;
 
