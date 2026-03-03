@@ -1134,7 +1134,7 @@ public class ParticleOrchestrator
 				if (i <= point.X + num2 && i >= point.X - num2 && j <= point.Y + num2 && j >= point2.Y - num2)
 					continue;
 
-				int num9 = WorldGen.KillTile_GetTileDustAmount(fail: true, tileSafely);
+					int num9 = WorldGen.KillTile_GetTileDustAmount(fail: true, tileSafely, i, j);
 				for (int k = 0; k < num9; k++) {
 					Dust obj = Main.dust[WorldGen.KillTile_MakeTileDust(i, j, tileSafely)];
 					obj.velocity.Y -= 3f + (float)num8 * 1.5f;
@@ -1450,7 +1450,7 @@ public class ParticleOrchestrator
 				if (tileSafely2.active() && Main.tileSolid[tileSafely2.type] && !Main.tileSolidTop[tileSafely2.type])
 					continue;
 
-				int num8 = WorldGen.KillTile_GetTileDustAmount(fail: true, tileSafely);
+					int num8 = WorldGen.KillTile_GetTileDustAmount(fail: true, tileSafely, j, k);
 				for (int l = 0; l < num8; l++) {
 					Dust obj = Main.dust[WorldGen.KillTile_MakeTileDust(j, k, tileSafely)];
 					obj.velocity.Y -= 3f + (float)num7 * 1.5f;
@@ -2119,7 +2119,7 @@ public class ParticleOrchestrator
 			Player player = Main.player[settings.IndexOfPlayerWhoInvokedThis];
 			if (player.active && !player.dead) {
 				sbyte voiceOverride = (sbyte)settings.UniqueInfoPiece;
-				sbyte voiceOverride2 = player.voiceOverride;
+					sbyte voiceOverride2 = (sbyte)player.voiceOverride;
 				player.voiceOverride = voiceOverride;
 				player.PlayHurtSound();
 				player.voiceOverride = voiceOverride2;

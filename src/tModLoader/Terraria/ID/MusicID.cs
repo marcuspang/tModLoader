@@ -119,5 +119,5 @@ public static class MusicID
 	public const int RainbowBoulderLoop = 103;
 	public const int Skeletron = 104;
 	public const int Count = 105;
-	public static readonly IdDictionary Search = IdDictionary.Create<MusicID, int>();
+	public static readonly IdDictionary Search = IdDictionary.Create(typeof(MusicID), typeof(int));
 }

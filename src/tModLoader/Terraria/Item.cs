@@ -1123,6 +1123,7 @@ public partial class Item : IEntitySourceTarget
 		crt = 0;
 		tagdmg = 0;
 		arpen = 0;
+		value = 0f;
 		switch (rolledPrefix) {
 			case 1:
 				size = 1.12f;

@@ -54022,7 +54022,7 @@ public partial class WorldGen
 	public static Player GetPlayerForTile(int x, int y) => Main.player[Player.FindClosest(new Vector2(x, y) * 16f, 16, 16)];
 
 	// made internal, added includeAllModdedLargeObjectDrops param
- 	internal static void KillTile_DropItems(int x, int y, Tile tileCache, bool includeLargeObjectDrops = false) 	
+	internal static void KillTile_DropItems(int x, int y, Tile tileCache, bool includeLargeObjectDrops = false, bool includeAllModdedLargeObjectDrops = false)
 	{
 		if (!TileLoader.Drop(x, y, Main.tile[x, y].type, includeLargeObjectDrops))
 			return;

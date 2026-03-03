@@ -710,7 +710,7 @@ namespace Terraria.ModLoader
 		[TestMethod]
 		public void TestItemSerializerCompatibility() {
 			var item = new Item();
-			item.SetDefaults(ItemID.Meowmere, true);
+				item.SetDefaults(ItemID.Meowmere);
 			item.prefix = 4;
 			item.stack = 25;
 			item.favorited = true;
