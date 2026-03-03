@@ -13,7 +13,9 @@
 		at the end of the build. If it's omitted, that can cause build failures
 		in subsequent builds because the task assembly can't be written by the next build.
 		-->
-		<BuildTasksTaskFactory>TaskHostFactory</BuildTasksTaskFactory>
+		<!-- TaskHostFactory fails to start on macOS (arm64 and x64); use in-proc loading there. -->
+		<BuildTasksTaskFactory Condition="$([MSBuild]::IsOSPlatform('OSX'))">AssemblyTaskFactory</BuildTasksTaskFactory>
+		<BuildTasksTaskFactory Condition="'$(BuildTasksTaskFactory)' == ''">TaskHostFactory</BuildTasksTaskFactory>
 	</PropertyGroup>
 
 	<ItemGroup>

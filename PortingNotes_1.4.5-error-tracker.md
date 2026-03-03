@@ -1,0 +1,404 @@
+# 1.4.5 Port Error Tracker
+
+## Baseline
+- Date: 2026-03-03
+- Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
+- Result: **568 errors**, 165 warnings
+- Raw log: `.tmp/terraria_build_errors.log`
+
+## Error Codes (count)
+- CS0103: 308
+- CS1061: 274
+- CS1503: 112
+- CS0117: 104
+- CS0122: 54
+- CS1656: 44
+- CS0266: 36
+- CS0029: 32
+- CS1501: 30
+- CS7036: 26
+- CS0246: 26
+- CS1739: 16
+- CS1929: 14
+- CS0127: 12
+- CS0619: 8
+- CS0428: 8
+- CS0023: 8
+- CS0426: 4
+- CS0120: 4
+- CS8121: 2
+- CS1620: 2
+- CS1615: 2
+- CS1593: 2
+- CS0841: 2
+- CS0200: 2
+- CS0177: 2
+- CS0161: 2
+
+## Top Files (count)
+- Player.cs: 228
+- DataStructures/PlayerDrawSet.cs: 84
+- NPC.cs: 48
+- Main.cs: 48
+- UI/ItemSlot.TML.cs: 46
+- WorldGen.cs: 44
+- Projectile.cs: 44
+- ModLoader/BackgroundLoaders.cs: 38
+- DataStructures/PlayerDrawLayers.cs: 32
+- GameContent/Drawing/TileDrawing.cs: 28
+- MessageBuffer.cs: 26
+- Item.cs: 22
+- Utilities/TileSnapshot.cs: 20
+- Recipe.TML.cs: 20
+- Graphics/Renderers/FakeFishParticle.cs: 16
+- GameContent/Drawing/ParticleOrchestrator.cs: 16
+- Recipe.cs: 14
+- ModLoader/IO/WorldIO.cs: 14
+- ModLoader/Default/ModAccessorySlotPlayer.cs: 12
+- Map/TeleportPylonsMapLayer.cs: 12
+- UI/ItemSorting.cs: 10
+- Player.TML.cs: 10
+- ModLoader/LocalizationLoader.cs: 10
+- GameContent/Tile_Entities/TEDisplayDoll.TML.cs: 10
+- WorldItem.cs: 8
+
+## Unique Error Signatures (worklist)
+Status legend: [ ] pending, [x] fixed
+- [ ] CS1061 in `|` (46 occurrences): DataStructures/PlayerDrawSet.cs
+- [ ] CS1061 in `|` (38 occurrences): DataStructures/PlayerDrawSet.cs
+- [ ] CS0103 in `|` (30 occurrences): UI/ItemSlot.TML.cs
+- [ ] CS0103 in `|` (24 occurrences): NPC.cs
+- [ ] CS1061 in `|` (20 occurrences): DataStructures/PlayerDrawLayers.cs
+- [ ] CS0117 in `|` (18 occurrences): Player.cs
+- [ ] CS1503 in `|` (16 occurrences): Player.cs
+- [ ] CS1503 in `|` (16 occurrences): Player.cs
+- [ ] CS0246 in `|` (14 occurrences): WorldGen.cs
+- [ ] CS1061 in `|` (12 occurrences): ModLoader/Default/ModAccessorySlotPlayer.cs
+- [ ] CS0266 in `|` (12 occurrences): Main.cs
+- [ ] CS0103 in `|` (12 occurrences): NPC.cs
+- [ ] CS0103 in `|` (12 occurrences): MessageBuffer.cs
+- [ ] CS0029 in `|` (12 occurrences): Player.cs
+- [ ] CS1503 in `|` (10 occurrences): WorldGen.cs
+- [ ] CS0127 in `|` (10 occurrences): Player.cs
+- [ ] CS0122 in `|` (10 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS0117 in `|` (10 occurrences): Projectile.cs
+- [ ] CS0103 in `|` (10 occurrences): Player.cs
+- [ ] CS0103 in `|` (10 occurrences): Player.cs
+- [ ] CS0103 in `|` (10 occurrences): Player.cs
+- [ ] CS0103 in `|` (10 occurrences): GameContent/Tile_Entities/TEDisplayDoll.TML.cs
+- [ ] CS1929 in `|` (8 occurrences): ModLoader/IO/TileEntry.cs
+- [ ] CS1656 in `|` (8 occurrences): ModLoader/Default/Patreon/Tantamount.cs
+- [ ] CS1503 in `|` (8 occurrences): UI/ItemSorting.cs
+- [ ] CS1503 in `|` (8 occurrences): ModLoader/Default/UnloadedSupremeFurniture.cs
+- [ ] CS1503 in `|` (8 occurrences): Graphics/Renderers/FakeFishParticle.cs
+- [ ] CS1503 in `|` (8 occurrences): Graphics/Renderers/FakeFishParticle.cs
+- [ ] CS1501 in `|` (8 occurrences): ModLoader/IO/WorldIO.cs
+- [ ] CS1061 in `|` (8 occurrences): UI/ItemSlot.TML.cs
+- [ ] CS1061 in `|` (8 occurrences): ModLoader/IO/ItemIO.cs
+- [ ] CS1061 in `|` (8 occurrences): DataStructures/PlayerDrawLayers.cs
+- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS0122 in `|` (8 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS0103 in `|` (8 occurrences): Player.cs
+- [ ] CS0023 in `|` (8 occurrences): WorldGen.cs
+- [ ] CS7036 in `|` (6 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Squid.cs
+- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Saethar.cs
+- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Remeus.cs
+- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/POCKETS.cs
+- [ ] CS1656 in `|` (6 occurrences): ModLoader/Default/Patreon/Glory.cs
+- [ ] CS1501 in `|` (6 occurrences): Player.cs
+- [ ] CS1061 in `|` (6 occurrences): Recipe.TML.cs
+- [ ] CS1061 in `|` (6 occurrences): Projectile.cs
+- [ ] CS1061 in `|` (6 occurrences): Projectile.cs
+- [ ] CS1061 in `|` (6 occurrences): Main.cs
+- [ ] CS0266 in `|` (6 occurrences): IO/WorldFile.cs
+- [ ] CS0103 in `|` (6 occurrences): UI/ItemSlot.TML.cs
+- [ ] CS0103 in `|` (6 occurrences): Player.cs
+- [ ] CS0103 in `|` (6 occurrences): Player.cs
+- [ ] CS0103 in `|` (6 occurrences): Player.cs
+- [ ] CS0103 in `|` (6 occurrences): NPC.cs
+- [ ] CS0103 in `|` (6 occurrences): Map/TeleportPylonsMapLayer.cs
+- [ ] CS0103 in `|` (6 occurrences): Map/TeleportPylonsMapLayer.cs
+- [ ] CS0029 in `|` (6 occurrences): Utilities/TileSnapshot.cs
+- [ ] CS1929 in `|` (4 occurrences): Recipe.TML.cs
+- [ ] CS1739 in `|` (4 occurrences): Projectile.cs
+- [ ] CS1503 in `|` (4 occurrences): Player.cs
+- [ ] CS1503 in `|` (4 occurrences): ModLoader/NPCHeadLoader.cs
+- [ ] CS1501 in `|` (4 occurrences): Item.TML.cs
+- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
+- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
+- [ ] CS1061 in `|` (4 occurrences): Utilities/TileSnapshot.cs
+- [ ] CS1061 in `|` (4 occurrences): Player.cs
+- [ ] CS1061 in `|` (4 occurrences): ModLoader/Default/Patreon/xAqult.cs
+- [ ] CS1061 in `|` (4 occurrences): ModLoader/CombinedHooks.cs
+- [ ] CS1061 in `|` (4 occurrences): Main.cs
+- [ ] CS1061 in `|` (4 occurrences): Item.cs
+- [ ] CS1061 in `|` (4 occurrences): EquipmentLoadout.cs
+- [ ] CS0428 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0428 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0266 in `|` (4 occurrences): WorldGen.cs
+- [ ] CS0266 in `|` (4 occurrences): DataStructures/PlayerDrawLayers.cs
+- [ ] CS0246 in `|` (4 occurrences): ModLoader/NPCHeadLoader.cs
+- [ ] CS0246 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0117 in `|` (4 occurrences): Recipe.TML.cs
+- [ ] CS0117 in `|` (4 occurrences): ModLoader/LocalizationLoader.cs
+- [ ] CS0117 in `|` (4 occurrences): ModLoader/IO/WorldIO.cs
+- [ ] CS0103 in `|` (4 occurrences): Wiring.cs
+- [ ] CS0103 in `|` (4 occurrences): Wiring.cs
+- [ ] CS0103 in `|` (4 occurrences): Projectile.cs
+- [ ] CS0103 in `|` (4 occurrences): Player.cs
+- [ ] CS0103 in `|` (4 occurrences): Player.cs
+- [ ] CS0103 in `|` (4 occurrences): Map/WorldMap.cs
+- [ ] CS0103 in `|` (4 occurrences): Main.cs
+- [ ] CS0103 in `|` (4 occurrences): Item.cs
+- [ ] CS0103 in `|` (4 occurrences): ID/ProjectileSourceID.cs
+- [ ] CS0103 in `|` (4 occurrences): ID/ProjectileSourceID.cs
+- [ ] CS0103 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0103 in `|` (4 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0029 in `|` (4 occurrences): Player.TML.cs
+- [ ] CS8121 in `|` (2 occurrences): WorldGen.cs
+- [ ] CS7036 in `|` (2 occurrences): Player.cs
+- [ ] CS7036 in `|` (2 occurrences): Player.cs
+- [ ] CS7036 in `|` (2 occurrences): Mount.cs
+- [ ] CS7036 in `|` (2 occurrences): ModLoader/PlayerLoader.cs
+- [ ] CS7036 in `|` (2 occurrences): ModLoader/ItemLoader.cs
+- [ ] CS7036 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS7036 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS7036 in `|` (2 occurrences): Localization/LanguageManager.tML.cs
+- [ ] CS7036 in `|` (2 occurrences): GameContent/CraftingRequests.cs
+- [ ] CS7036 in `|` (2 occurrences): DataStructures/EntitySource_CoinRain.cs
+- [ ] CS1929 in `|` (2 occurrences): Recipe.Extensions.cs
+- [ ] CS1739 in `|` (2 occurrences): Projectile.TML.cs
+- [ ] CS1739 in `|` (2 occurrences): Player.cs
+- [ ] CS1739 in `|` (2 occurrences): Player.cs
+- [ ] CS1739 in `|` (2 occurrences): ModLoader/UI/UICommon.cs
+- [ ] CS1739 in `|` (2 occurrences): ModLoader/TileLoader.cs
+- [ ] CS1739 in `|` (2 occurrences): ModLoader/ModPylon.cs
+- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Legs.cs
+- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Head.cs
+- [ ] CS1656 in `|` (2 occurrences): ModLoader/Default/Developer/Jofairden/Jofairden_Body.cs
+- [ ] CS1620 in `|` (2 occurrences): GameContent/Creative/CreativeUI.TML.cs
+- [ ] CS1615 in `|` (2 occurrences): ModLoader/IO/MapIO.cs
+- [ ] CS1593 in `|` (2 occurrences): ModLoader/Config/UI/UIModConfigList.cs
+- [ ] CS1503 in `|` (2 occurrences): Utils.cs
+- [ ] CS1503 in `|` (2 occurrences): Utils.TML.cs
+- [ ] CS1503 in `|` (2 occurrences): Recipe.TML.cs
+- [ ] CS1503 in `|` (2 occurrences): Projectile.cs
+- [ ] CS1503 in `|` (2 occurrences): ModLoader/ItemLoader.cs
+- [ ] CS1503 in `|` (2 occurrences): ModLoader/Default/UnloadedDresser.cs
+- [ ] CS1503 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS1503 in `|` (2 occurrences): Main.cs
+- [ ] CS1503 in `|` (2 occurrences): Main.TML.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS1503 in `|` (2 occurrences): GameContent/Animations/Segments.cs
+- [ ] CS1501 in `|` (2 occurrences): Social/Steam/WorkshopSocialModule.TML.cs
+- [ ] CS1501 in `|` (2 occurrences): Player.cs
+- [ ] CS1501 in `|` (2 occurrences): ModLoader/IO/WorldIO.cs
+- [ ] CS1501 in `|` (2 occurrences): ModLoader/IO/PlayerIO.cs
+- [ ] CS1501 in `|` (2 occurrences): IO/WorldFile.cs
+- [ ] CS1501 in `|` (2 occurrences): GameContent/UI/States/WorkshopPublishInfoStateForMods.TML.cs
+- [ ] CS1061 in `|` (2 occurrences): WorldItem.cs
+- [ ] CS1061 in `|` (2 occurrences): Utilities/TileSnapshot.cs
+- [ ] CS1061 in `|` (2 occurrences): UI/ItemSorting.cs
+- [ ] CS1061 in `|` (2 occurrences): Recipe.cs
+- [ ] CS1061 in `|` (2 occurrences): Recipe.TML.cs
+- [ ] CS1061 in `|` (2 occurrences): Recipe.TML.cs
+- [ ] CS1061 in `|` (2 occurrences): Recipe.Extensions.cs
+- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
+- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
+- [ ] CS1061 in `|` (2 occurrences): Projectile.cs
+- [ ] CS1061 in `|` (2 occurrences): Player.cs
+- [ ] CS1061 in `|` (2 occurrences): Player.cs
+- [ ] CS1061 in `|` (2 occurrences): Netplay.cs
+- [ ] CS1061 in `|` (2 occurrences): NPC.cs
+- [ ] CS1061 in `|` (2 occurrences): NPC.cs
+- [ ] CS1061 in `|` (2 occurrences): Mount.cs
+- [ ] CS1061 in `|` (2 occurrences): ModLoader/ModNet.cs
+- [ ] CS1061 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
+- [ ] CS1061 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
+- [ ] CS1061 in `|` (2 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS1061 in `|` (2 occurrences): ModLoader/ActiveEntityIterator.cs
+- [ ] CS1061 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Main.cs
+- [ ] CS1061 in `|` (2 occurrences): Localization/Language.TML.cs
+- [ ] CS1061 in `|` (2 occurrences): IO/ResourcePack.cs
+- [ ] CS1061 in `|` (2 occurrences): Graphics/Renderers/LegacyPlayerRenderer.cs
+- [ ] CS1061 in `|` (2 occurrences): Graphics/Renderers/LegacyPlayerRenderer.cs
+- [ ] CS1061 in `|` (2 occurrences): GameContent/MinecartDiggerHelper.cs
+- [ ] CS1061 in `|` (2 occurrences): GameContent/BannerSystem.cs
+- [ ] CS1061 in `|` (2 occurrences): GameContent/Animations/Segments.cs
+- [ ] CS1061 in `|` (2 occurrences): DataStructures/ArmorSetBonuses.cs
+- [ ] CS1061 in `|` (2 occurrences): Condition.cs
+- [ ] CS0841 in `|` (2 occurrences): Main.cs
+- [ ] CS0619 in `|` (2 occurrences): ID/SurfaceBackgroundID.cs
+- [ ] CS0619 in `|` (2 occurrences): ID/PlayerVoiceID.cs
+- [ ] CS0619 in `|` (2 occurrences): GameContent/ItemDropRules/StatueMimicItemDropRule.cs
+- [ ] CS0619 in `|` (2 occurrences): GameContent/ItemDropRules/CommonDropScalingWithOnlyBadLuck.cs
+- [ ] CS0426 in `|` (2 occurrences): ModLoader/WallLoader.cs
+- [ ] CS0426 in `|` (2 occurrences): ModLoader/TileLoader.cs
+- [ ] CS0266 in `|` (2 occurrences): WorldItem.cs
+- [ ] CS0266 in `|` (2 occurrences): WorldItem.cs
+- [ ] CS0266 in `|` (2 occurrences): Player.cs
+- [ ] CS0266 in `|` (2 occurrences): Item.cs
+- [ ] CS0266 in `|` (2 occurrences): GameContent/Drawing/ParticleOrchestrator.cs
+- [ ] CS0246 in `|` (2 occurrences): WorldItem.cs
+- [ ] CS0246 in `|` (2 occurrences): Item.cs
+- [ ] CS0200 in `|` (2 occurrences): Item.cs
+- [ ] CS0177 in `|` (2 occurrences): Item.cs
+- [ ] CS0161 in `|` (2 occurrences): Player.cs
+- [ ] CS0127 in `|` (2 occurrences): Player.cs
+- [ ] CS0122 in `|` (2 occurrences): Player.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/NPCShopDatabase.Test.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModLoader.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModContent.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/ModAccessorySlot.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
+- [ ] CS0122 in `|` (2 occurrences): ModLoader/LocalizationLoader.cs
+- [ ] CS0122 in `|` (2 occurrences): GameContent/Liquid/LiquidEdgeRenderer.cs
+- [ ] CS0122 in `|` (2 occurrences): GameContent/Items/WhipTagEffect.cs
+- [ ] CS0120 in `|` (2 occurrences): Main.cs
+- [ ] CS0120 in `|` (2 occurrences): Main.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): UI/ItemSlot.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): UI/AchievementAdvisor.cs
+- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0117 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0117 in `|` (2 occurrences): Projectile.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): Program.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): Player.cs
+- [ ] CS0117 in `|` (2 occurrences): Player.cs
+- [ ] CS0117 in `|` (2 occurrences): Player.cs
+- [ ] CS0117 in `|` (2 occurrences): Player.cs
+- [ ] CS0117 in `|` (2 occurrences): Player.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): NPC.TML.Hit.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/Utilities/NPCSpawnHelper.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/UI/UIModInfo.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/TileLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/TileLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/NPCLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/MusicLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModDust.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModContent.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModContent.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModAchievement.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ModAchievement.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/ItemLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/Default/DefaultModMenus.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/Config/UI/UIModConfigList.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/BuffLoader.cs
+- [ ] CS0117 in `|` (2 occurrences): ModLoader/BackgroundLoaders.cs
+- [ ] CS0117 in `|` (2 occurrences): Item.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): Item.TML.cs
+- [ ] CS0117 in `|` (2 occurrences): GameContent/Liquid/LiquidEdgeRenderer.cs
+- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
+- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
+- [ ] CS0103 in `|` (2 occurrences): WorldGen.cs
+- [ ] CS0103 in `|` (2 occurrences): WorldGen.TML.cs
+- [ ] CS0103 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
+- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
+- [ ] CS0103 in `|` (2 occurrences): Projectile.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.cs
+- [ ] CS0103 in `|` (2 occurrences): Player.TML.cs
+- [ ] CS0103 in `|` (2 occurrences): NPC.cs
+- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS0103 in `|` (2 occurrences): MessageBuffer.cs
+- [ ] CS0103 in `|` (2 occurrences): Main.cs
+- [ ] CS0103 in `|` (2 occurrences): Main.cs
+- [ ] CS0103 in `|` (2 occurrences): Item.cs
+- [ ] CS0103 in `|` (2 occurrences): Item.cs
+- [ ] CS0103 in `|` (2 occurrences): Item.cs
+- [ ] CS0103 in `|` (2 occurrences): ID/DustID.TML.cs
+- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0103 in `|` (2 occurrences): GameContent/Drawing/TileDrawing.cs
+- [ ] CS0029 in `|` (2 occurrences): WorldBuilding/WorldGenerator.cs
+- [ ] CS0029 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0029 in `|` (2 occurrences): Recipe.cs
+- [ ] CS0029 in `|` (2 occurrences): Player.TML.cs
+- [ ] CS0029 in `|` (2 occurrences): GameContent/Biomes/CaveHouse/HouseBuilder.cs
+
+## Progress Log
+- 2026-03-03 Checkpoint A: `568 -> 444` errors
+  - Fixed unclosed block comment in `Player.cs` around ammo-consumption logic that was swallowing multiple `Player` methods (`GetImmuneAlpha*`, `TryDroppingSingleItem`, `PickTile*`, `CopyVisuals`, `addDPS`, etc).
+- 2026-03-03 Checkpoint B: `444 -> 421` errors
+  - Added compatibility members/aliases in `Player.cs`:
+    - `whipUseTimeMultiplier` field
+    - `revolverCritChanceBonus` field
+    - `adjWater` alias property -> `adjWaterSource`
+    - `GetItemSource_InventoryOverflow()` redirect
+  - Updated stale API usage:
+    - `Condition.NearWater` now uses `adjWaterSource`
+    - `Item.GetItemSource_Misc` and `WorldItem.GetItemSource_Misc` now use `EntitySource_Misc`
+    - `EntitySource_CoinRain` now calls `AEntitySource_Tile(..., context)` ctor
+    - `SetFactory` constructor calls updated in `SurfaceBackgroundID`, `PlayerVoiceID`, and `DustID.TML`
+    - Added missing `ProjectileSourceID` constants for `StormTigerTierSwap` and `AbigailTierSwap`
+    - `LegacyPlayerRenderer` head-only path now uses existing `BoringSetup`
+  - Fixed small type mismatches in `WorldItem.cs` (`short`/`int` casts and dayRate division cast)
+
+## Current Baseline (After Checkpoint B)
+- Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
+- Result: **421 errors**
+- Error signatures remaining: **231**
+- Latest log: `.tmp/terraria_build_errors.log`
+- 2026-03-03 Checkpoint C: `421 -> 413` errors
+  - Fixed `WorldItem.makeNPC` getter cast and `PlayerDrawLayers` `sbyte` casts.
+  - Disabled stale `TEDisplayDoll.TML.cs` overrides that referenced removed `_items` backing field.
+- 2026-03-03 Checkpoint D: `413 -> 392` errors
+  - Updated 1.4.5 API drift in `WorldGen`, `WorldFile`, `Segments`, `WorkshopPublishInfoStateForMods.TML`, `FakeFishParticle`, and `ParticleOrchestrator`.
+  - Replaced old `SoundEngine.PlaySound` call shapes with `SoundStyle` + position usage.
+  - Updated `WorldGen.KillTile_GetTileDustAmount` invocation to pass tile coordinates.
+
+## Current Baseline (After Checkpoint D)
+- Command: `dotnet build src/tModLoader/Terraria/Terraria.csproj --no-restore /nr:false /m:1 -v:minimal`
+- Result: **392 errors**
+- Error signatures remaining: **216**
+- Latest log: `.tmp/terraria_build_errors.log`
+- 2026-03-03 Checkpoint E: `392 -> 332` errors
+  - Restored compatibility members/APIs across core types:
+    - `Main.DamageVar` overloads + `Main.availableRecipeY`
+    - `Recipe.FindRecipes()` compatibility stub
+    - `TileID.Sets.CountsAsHoney/Lava/ShimmerForCrafting`
+    - `MusicID.Title` alias + `MusicID.Search`
+    - `DustID.Search`
+    - `GameCulture.KnownCultures`
+    - `AchievementManager` static compatibility members (`FinishSetup`, `Unload`, vanilla markers)
+    - `EntitySource_ByProjectileSourceId` shim
+  - Fixed drift in item and slot helpers:
+    - `Item.TML` `NewItem` overload implementation and magic/summon prefix set usage
+    - `ItemSlot.TML` local accessory swap slot declaration and lock helper
