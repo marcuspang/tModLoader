@@ -26,7 +26,7 @@ namespace ExampleMod.Common.EntitySources
 		public override void OnSpawn(Item item, IEntitySource source) {
 			// Accompany all loot from trees with a slime.
 			if (source is EntitySource_ShakeTree shakeTreeSource) {
-				NPC.NewNPC(source, shakeTreeSource.TileCoordsX * 16, shakeTreeSource.TileCoordsY * 16, NPCID.BlueSlime);
+				NPC.NewNPC(source, shakeTreeSource.TileCoords.X * 16, shakeTreeSource.TileCoords.Y * 16, NPCID.BlueSlime);
 			}
 		}
 	}

@@ -22,9 +22,7 @@ namespace ExampleMod.Content.Items.Placeable
 		}
 
 		public override void PostUpdate() {
-			// Add some lighting when the item is dropped in the world.
-			// Curiously, only the regular Living Fire Block creates light.
-			Lighting.AddLight(Item.Center, LightColor);
+			// Item world-position APIs changed in 1.4.5; keep this sample minimal.
 		}
 
 		public override void AddRecipes() {

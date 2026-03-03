@@ -29,7 +29,7 @@ namespace ExampleMod.Content.Tiles.Furniture
 			TileID.Sets.DisableSmartCursor[Type] = true;
 			TileID.Sets.OpenDoorID[Type] = ModContent.TileType<ExampleDoorOpen>();
 
-			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
+			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoorTypes);
 
 			DustType = ModContent.DustType<Sparkle>();
 			AdjTiles = [TileID.ClosedDoor];

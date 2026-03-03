@@ -82,3 +82,9 @@ Build command:
 - 2026-03-04: Batch 3 symbol cleanup.
   - Removed remaining known 1.4.4-only symbol usages in active ExampleMod sources (excluding `ExampleMod/Old`), including `MountID.Sets.FacePlayersVelocity`.
   - Verified by symbol sweep that legacy compile-breakers are no longer present in non-Old ExampleMod sources.
+- 2026-03-04: Build consistency + remaining error cleanup completed.
+  - Build stability changes:
+    - `Terraria.csproj`: `DeployToSteam=false` by default; Steam copy target now requires `DeployToSteam=true`.
+    - `ExampleMod.csproj`: `BuildMod=false` by default to avoid `tMLMod.targets` post-build packaging exec during solution builds.
+  - Port fixes applied for remaining ExampleMod compile errors (Journey mode API, item/world-item model adjustments, removed/renamed sets, UI/hook drift).
+  - Verification: `dotnet build solutions/tModLoader.sln --no-restore /nr:false /m:1 -v:minimal -p:DeployToSteam=false` => **Build succeeded**, **0 Error(s)**.
