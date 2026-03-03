@@ -19451,16 +19451,10 @@ public partial class Main : Game
 		return false;
 	}
 
-	protected void DrawTiles(bool solidLayer, bool intoRenderTargets = false, int waterStyleOverride = -1)
-	{
-		TimeLogger.StartTimestamp fromTimestamp = TimeLogger.Start();
-		try {
-			TilesRenderer.Begin(intoRenderTargets ? RasterizerState.CullCounterClockwise : Rasterizer, intoRenderTargets ? Matrix.Identity : Transform);
+		protected void DrawTiles(bool solidLayer, bool intoRenderTargets = false, int waterStyleOverride = -1)
+		{
+			TimeLogger.StartTimestamp fromTimestamp = TimeLogger.Start();
 			TilesRenderer.Draw(solidLayer, intoRenderTargets, waterStyleOverride);
-		}
-		finally {
-			TilesRenderer.End();
-		}
 
 		if (solidLayer)
 			TimeLogger.DrawSolidTiles.AddTime(fromTimestamp);
@@ -19953,9 +19947,9 @@ public partial class Main : Game
 
 	protected void DrawNPCCheckAlt(NPC n)
 	{
-		if (TownNPCProfiles.Instance.GetProfile(n.type, out var profile))
-			TextureAssets.Npc[n.type] = profile.GetTextureNPCShouldUse(n);
-	}
+			if (TownNPCProfiles.Instance.GetProfile(n, out var profile))
+				TextureAssets.Npc[n.type] = profile.GetTextureNPCShouldUse(n);
+		}
 
 	protected void DrawNPC(int iNPCIndex, bool behindTiles)
 	{

@@ -9533,7 +9533,7 @@ public partial class Projectile : Entity
 		localNPCHitCooldown = -1;
 
 		DamageType = DamageClass.SummonMeleeSpeed;
-		VanillaWhipSettings(this, out WhipSettings.Segments, out WhipSettings.RangeMultiplier);
+			GetWhipSettings(this, out var _, out WhipSettings.Segments, out WhipSettings.RangeMultiplier);
 	}
 
 	public void DefaultToSpear()
@@ -11106,8 +11106,8 @@ public partial class Projectile : Entity
 		/*
 		int num4 = (int)((float)damage * projectileSpecificDamageMultiplier);
 		*/
-		modifiers.SourceDamage *= projectileSpecificDamageMultiplier;
-		float num4 = 1000; // to reduce patches, set to 1000, and then turn it into a multiplier later
+			int num4 = 1000; // to reduce patches, set to 1000, and then turn it into a multiplier later
+			num4 = (int)(num4 * projectileSpecificDamageMultiplier);
 		if (type > 0 && ProjectileID.Sets.StardustDragon[type]) {
 			float value = (scale - 1f) * 100f;
 			value = Utils.Clamp(value, 0f, 50f);
@@ -11137,8 +11137,8 @@ public partial class Projectile : Entity
 			num4 = (int)((float)num4 * (1f + (float)num7 * num9));
 		}
 
-		if (ownedBySomeone && type == 189 && Main.player[owner].strongBees)
-			modifiers.SourceDamage.Base += 5; //num4 += 5;
+			if (ownedBySomeone && type == 189 && Main.player[owner].strongBees)
+				num4 += 5;
 
 		if (ownedBySomeone) {
 			int num10 = 0;

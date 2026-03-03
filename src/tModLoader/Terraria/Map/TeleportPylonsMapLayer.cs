@@ -49,9 +49,10 @@ public class TeleportPylonsMapLayer : IMapLayer
 			color = Color.Gray * 0.5f;
 		*/
 
-		bool flag = false;
-		int num2 = -1;
-		if (Main.mapFullscreen && Main.MapPylonTile.X != -1 && Main.MapPylonTile.Y != -1) {
+			bool flag = false;
+			int num2 = -1;
+			float num = 1f;
+			if (Main.mapFullscreen && Main.MapPylonTile.X != -1 && Main.MapPylonTile.Y != -1) {
 			Point center = context.GetUnclampedDrawRegion(value, Main.MapPylonTile.ToVector2() + new Vector2(1.5f, 2f), new SpriteFrame(11, 1, 0, 0) {
 				PaddingY = 0
 			}, num, Alignment.Center).Center;
@@ -74,20 +75,20 @@ public class TeleportPylonsMapLayer : IMapLayer
 			if (!IsRevealed(info2))
 				continue;
 
-			bool onScreen = true;
+				bool onScreen = true;
+				bool isNearPylon = TeleportPylonsSystem.IsPlayerNearAPylon(Main.LocalPlayer);
 
-			float num = 1f;
-			float scaleIfSelected = num * 2f;
-			Color color = Color.White;
+				float scaleIfSelected = num * 2f;
+				Color color = Color.White;
 
-			if (!TeleportPylonsSystem.IsPlayerNearAPylon(Main.LocalPlayer))
-				color = Color.Gray * 0.5f;
+				if (!isNearPylon)
+					color = Color.Gray * 0.5f;
 
-				if (!PylonLoader.PreDrawMapIcon(ref context, ref text, ref info2, ref num2, ref color, ref num, ref scaleIfSelected))
+				if (!PylonLoader.PreDrawMapIcon(ref context, ref text, ref info2, ref isNearPylon, ref color, ref num, ref scaleIfSelected))
 					continue;
 
 				if (info2.ModPylon is ModPylon pylon) {
-					pylon.DrawMapIcon(ref context, ref text, info2, num2, color, num, scaleIfSelected);
+					pylon.DrawMapIcon(ref context, ref text, info2, isNearPylon, color, num, scaleIfSelected);
 					continue;
 				}
 
