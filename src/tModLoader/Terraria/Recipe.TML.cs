@@ -21,6 +21,12 @@ public partial class Recipe
 {
 	public static void FindRecipes()
 	{
+		// Compatibility shim for APIs and hooks that still call Recipe.FindRecipes.
+		// In 1.4.5, route to the canonical refresh path.
+		if (Main.dedServ)
+			return;
+
+		UpdateRecipeList();
 	}
 
 	[Obsolete($"Replaced by {nameof(IngredientQuantityRules)} due to not accounting for shimmer decrafting")]
