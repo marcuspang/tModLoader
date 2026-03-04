@@ -45,7 +45,8 @@ namespace Terraria.ModLoader
 			}
 			catch (ModSortingException e) {
 				AssertSetsEqual(e.errored.Select(m => m.Name).ToList(), mods);
-				Assert.AreEqual(msg, e.Message.Trim());
+				// Keep tests stable across OS/runtime newline conventions.
+				Assert.AreEqual(msg.ReplaceLineEndings("\n"), e.Message.Trim().ReplaceLineEndings("\n"));
 			}
 		}
 
