@@ -39324,7 +39324,8 @@ public partial class Projectile : Entity
 
 	public static void GetWhipSettings(Projectile proj, out float timeToFlyOut, out int segments, out float rangeMultiplier)
 	{
-		timeToFlyOut = Main.player[proj.owner].itemAnimationMax * proj.MaxUpdates;
+		Player ownerPlayer = proj.owner >= 0 && proj.owner < Main.player.Length ? Main.player[proj.owner] : null;
+		timeToFlyOut = (ownerPlayer?.itemAnimationMax ?? 0) * proj.MaxUpdates;
 		if (proj.isAPreviewDisplayDoll)
 			timeToFlyOut = 60f;
 

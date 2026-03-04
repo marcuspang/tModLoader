@@ -42521,8 +42521,8 @@ public partial class Main : Game
 		if (!dedServ)
 			SocialAPI.Shutdown();
 
-		Assets.TransferCompletedAssets();
-		Exit();
+			Assets.TransferCompletedAssets();
+			Exit();
 	}
 
 	private void Main_Exiting(object sender, EventArgs e)
@@ -54799,7 +54799,8 @@ public partial class Main : Game
 			if (Main.OnPostDraw != null)
 				Main.OnPostDraw(gameTime);
 
-			Assets.TransferCompletedAssets();
+				Assets.TransferCompletedAssets();
+				ModContent.TransferCompletedAssets();
 			DetailedFPS.End();
 			_isDrawingOrUpdating = false;
 		}
