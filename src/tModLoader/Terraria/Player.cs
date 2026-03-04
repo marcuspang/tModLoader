@@ -2091,15 +2091,15 @@ public partial class Player : Entity, IFixLoadedData
 	public bool canJumpAgain_Basilisk;
 	public bool isPerformingJump_Basilisk;
 	*/
-	internal bool hasJumpOption_Cloud { set { if (value) GetJumpState<CloudInABottleJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Sandstorm { set { if (value) GetJumpState<SandstormInABottleJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Blizzard { set { if (value) GetJumpState<BlizzardInABottleJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Fart { set { if (value) GetJumpState<FartInAJarJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Sail { set { if (value) GetJumpState<TsunamiInABottleJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Unicorn { set { if (value) GetJumpState<UnicornMountJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Santank { set { if (value) GetJumpState<SantankMountJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_WallOfFleshGoat { set { if (value) GetJumpState<GoatMountJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
-	internal bool hasJumpOption_Basilisk { set { if (value) GetJumpState<BasiliskMountJump>().Enable(); else throw new ArgumentException("Forgot to comment out a hasJumpOption_X = false statement"); } }
+		internal bool hasJumpOption_Cloud { set { if (value) GetJumpState<CloudInABottleJump>().Enable(); else GetJumpState<CloudInABottleJump>().Disable(); } }
+		internal bool hasJumpOption_Sandstorm { set { if (value) GetJumpState<SandstormInABottleJump>().Enable(); else GetJumpState<SandstormInABottleJump>().Disable(); } }
+		internal bool hasJumpOption_Blizzard { set { if (value) GetJumpState<BlizzardInABottleJump>().Enable(); else GetJumpState<BlizzardInABottleJump>().Disable(); } }
+		internal bool hasJumpOption_Fart { set { if (value) GetJumpState<FartInAJarJump>().Enable(); else GetJumpState<FartInAJarJump>().Disable(); } }
+		internal bool hasJumpOption_Sail { set { if (value) GetJumpState<TsunamiInABottleJump>().Enable(); else GetJumpState<TsunamiInABottleJump>().Disable(); } }
+		internal bool hasJumpOption_Unicorn { set { if (value) GetJumpState<UnicornMountJump>().Enable(); else GetJumpState<UnicornMountJump>().Disable(); } }
+		internal bool hasJumpOption_Santank { set { if (value) GetJumpState<SantankMountJump>().Enable(); else GetJumpState<SantankMountJump>().Disable(); } }
+		internal bool hasJumpOption_WallOfFleshGoat { set { if (value) GetJumpState<GoatMountJump>().Enable(); else GetJumpState<GoatMountJump>().Disable(); } }
+		internal bool hasJumpOption_Basilisk { set { if (value) GetJumpState<BasiliskMountJump>().Enable(); else GetJumpState<BasiliskMountJump>().Disable(); } }
 
 	public bool isPerformingPogostickTricks;
 	public bool autoJump;
