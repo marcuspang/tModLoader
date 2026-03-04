@@ -270,11 +270,29 @@ public class WorkshopPublishInfoStateForMods : AWorkshopPublishInfoState<TmodFil
 		return false;
 	}
 
-	internal static unsafe void UpscaleAndSaveImageAsPng(string srcImagePath, string dstImagePath, int dstWidth, int dstHeight)
+	internal static void UpscaleAndSaveImageAsPng(string srcImagePath, string dstImagePath, int dstWidth, int dstHeight)
 	{
+		if (dstWidth <= 0 || dstHeight <= 0)
+			throw new ArgumentOutOfRangeException(nameof(dstWidth), "Destination dimensions must be positive.");
+
 		using var srcStream = File.OpenRead(srcImagePath);
 		Texture2D.TextureDataFromStreamEXT(srcStream, out int srcWidth, out int srcHeight, out byte[] srcBytes);
 
-		PlatformUtilities.SavePng(dstImagePath, srcWidth, srcHeight, srcBytes);
+		// Preserve pixel-art edges: workshop icon upscaling should not blur.
+		byte[] dstBytes = new byte[dstWidth * dstHeight * 4];
+		for (int y = 0; y < dstHeight; y++) {
+			int srcY = y * srcHeight / dstHeight;
+			for (int x = 0; x < dstWidth; x++) {
+				int srcX = x * srcWidth / dstWidth;
+				int srcIndex = (srcY * srcWidth + srcX) * 4;
+				int dstIndex = (y * dstWidth + x) * 4;
+				dstBytes[dstIndex] = srcBytes[srcIndex];
+				dstBytes[dstIndex + 1] = srcBytes[srcIndex + 1];
+				dstBytes[dstIndex + 2] = srcBytes[srcIndex + 2];
+				dstBytes[dstIndex + 3] = srcBytes[srcIndex + 3];
+			}
+		}
+
+		PlatformUtilities.SavePng(dstImagePath, dstWidth, dstHeight, dstBytes);
 	}
 }
