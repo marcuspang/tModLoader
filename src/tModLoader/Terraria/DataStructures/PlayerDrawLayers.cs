@@ -177,9 +177,15 @@ public static partial class PlayerDrawLayers
 		return drawinfo.drawPlayer.GetImmuneAlphaPure(color, drawinfo.shadow);
 	}
 
+	private static bool HasValidHairTextureIndex(Player player)
+	{
+		int hair = player.hair;
+		return hair >= 0 && hair < TextureAssets.PlayerHair.Length && hair < TextureAssets.PlayerHairAlt.Length;
+	}
+
 	public static void DrawPlayer_01_BackHair(ref PlayerDrawSet drawinfo)
 	{
-		if (!drawinfo.hideHair && drawinfo.backHairDraw) {
+		if (!drawinfo.hideHair && drawinfo.backHairDraw && HasValidHairTextureIndex(drawinfo.drawPlayer)) {
 			Vector2 position = new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(drawinfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.headPosition + drawinfo.headVect + drawinfo.hairOffset;
 			if (drawinfo.drawPlayer.head == -1 || drawinfo.fullHair || drawinfo.drawsBackHairWithoutHeadgear) {
 				DrawData item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairBackFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
@@ -1921,18 +1927,18 @@ public static partial class PlayerDrawLayers
 			item = new DrawData(TextureAssets.ArmorHead[drawinfo.drawPlayer.head].Value, helmetOffset + new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(drawinfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.headPosition + drawinfo.headVect, drawinfo.drawPlayer.bodyFrame, color, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
 			item.shader = shader;
 			drawinfo.DrawDataCache.Add(item);
-			if (!drawinfo.drawPlayer.invis) {
-				item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+				if (!drawinfo.drawPlayer.invis && HasValidHairTextureIndex(drawinfo.drawPlayer)) {
+					item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+					item.shader = drawinfo.hairDyePacked;
+					drawinfo.DrawDataCache.Add(item);
+				}
+			}
+
+			if (flag4 && drawinfo.hatHair && !drawinfo.drawPlayer.invis && HasValidHairTextureIndex(drawinfo.drawPlayer)) {
+				item = new DrawData(TextureAssets.PlayerHairAlt[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
 				item.shader = drawinfo.hairDyePacked;
 				drawinfo.DrawDataCache.Add(item);
 			}
-		}
-
-		if (flag4 && drawinfo.hatHair && !drawinfo.drawPlayer.invis) {
-			item = new DrawData(TextureAssets.PlayerHairAlt[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-			item.shader = drawinfo.hairDyePacked;
-			drawinfo.DrawDataCache.Add(item);
-		}
 
 		if (flag4 && drawinfo.drawPlayer.head == 270) {
 			Rectangle bodyFrame = drawinfo.drawPlayer.bodyFrame;
@@ -2012,12 +2018,12 @@ public static partial class PlayerDrawLayers
 				drawinfo.DrawDataCache.Add(item);
 			}
 
-			if (!drawinfo.drawPlayer.invis) {
-				item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-				item.shader = drawinfo.hairDyePacked;
-				drawinfo.DrawDataCache.Add(item);
+				if (!drawinfo.drawPlayer.invis && HasValidHairTextureIndex(drawinfo.drawPlayer)) {
+					item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+					item.shader = drawinfo.hairDyePacked;
+					drawinfo.DrawDataCache.Add(item);
+				}
 			}
-		}
 		else if (flag4 && drawinfo.drawPlayer.head > 0 && drawinfo.drawPlayer.head < ArmorIDs.Head.Count && !flag2) {
 			if (!(drawinfo.drawPlayer.invis && flag3)) {
 				if (drawinfo.drawPlayer.head == 13) {
@@ -2159,11 +2165,11 @@ public static partial class PlayerDrawLayers
 				}
 			}
 		}
-		else if (flag4 && !drawinfo.drawPlayer.invis && (drawinfo.drawPlayer.face < 0 || !ArmorIDs.Face.Sets.PreventHairDraw[drawinfo.drawPlayer.face])) {
-			item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
-			item.shader = drawinfo.hairDyePacked;
-			drawinfo.DrawDataCache.Add(item);
-		}
+			else if (flag4 && !drawinfo.drawPlayer.invis && HasValidHairTextureIndex(drawinfo.drawPlayer) && (drawinfo.drawPlayer.face < 0 || !ArmorIDs.Face.Sets.PreventHairDraw[drawinfo.drawPlayer.face])) {
+				item = new DrawData(TextureAssets.PlayerHair[drawinfo.drawPlayer.hair].Value, position, drawinfo.hairFrontFrame, drawinfo.colorHair, drawinfo.drawPlayer.headRotation, drawinfo.headVect, 1f, drawinfo.playerEffect);
+				item.shader = drawinfo.hairDyePacked;
+				drawinfo.DrawDataCache.Add(item);
+			}
 
 		bool flag6 = drawinfo.drawPlayer.head < 0 || !ArmorIDs.Head.Sets.PreventBeardDraw[drawinfo.drawPlayer.head];
 		if (drawinfo.drawPlayer.mount.Active && drawinfo.drawPlayer.mount.Type == 54)

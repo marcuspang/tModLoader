@@ -52565,6 +52565,9 @@ public partial class Main : Game
 
 	public void LoadHair(int i)
 	{
+		if (i < 0 || i >= TextureAssets.PlayerHair.Length || i >= TextureAssets.PlayerHairAlt.Length)
+			return;
+
 		if (TextureAssets.PlayerHair[i].State == AssetState.NotLoaded) {
 			Assets.Request<Texture2D>(TextureAssets.PlayerHair[i].Name);
 			Assets.Request<Texture2D>(TextureAssets.PlayerHairAlt[i].Name);

@@ -14334,11 +14334,11 @@ public partial class Player : Entity, IFixLoadedData
 
 	public void GetHairSettings(out bool fullHair, out bool hatHair, out bool hideHair, out bool backHairDraw, out bool drawsBackHairWithoutHeadgear)
 	{
-		fullHair = head >= 0 && ArmorIDs.Head.Sets.DrawFullHair[head];
-		hatHair = head >= 0 && ArmorIDs.Head.Sets.DrawHatHair[head];
-		hideHair = (face >= 0 && ArmorIDs.Face.Sets.PreventHairDraw[face]) || (faceHead >= 0 && head != 0);
-		backHairDraw = hair >= 0 && HairID.Sets.DrawBackHair[hair];
-		drawsBackHairWithoutHeadgear = head >= 0 && ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[head];
+		fullHair = head >= 0 && head < ArmorIDs.Head.Sets.DrawFullHair.Length && ArmorIDs.Head.Sets.DrawFullHair[head];
+		hatHair = head >= 0 && head < ArmorIDs.Head.Sets.DrawHatHair.Length && ArmorIDs.Head.Sets.DrawHatHair[head];
+		hideHair = (face >= 0 && face < ArmorIDs.Face.Sets.PreventHairDraw.Length && ArmorIDs.Face.Sets.PreventHairDraw[face]) || (faceHead >= 0 && head != 0);
+		backHairDraw = hair >= 0 && hair < HairID.Sets.DrawBackHair.Length && HairID.Sets.DrawBackHair[hair];
+		drawsBackHairWithoutHeadgear = head >= 0 && head < ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear.Length && ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[head];
 
 		/*
 		fullHair = (hatHair = (hideHair = (drawsBackHairWithoutHeadgear = false)));
