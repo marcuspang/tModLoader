@@ -29,6 +29,13 @@ public partial class Recipe
 		UpdateRecipeList();
 	}
 
+	[Obsolete("Use Recipe.FindRecipes() or Recipe.UpdateRecipeList().")]
+	public static void FindRecipes(bool canDelayCheck)
+	{
+		// 1.4.5 removed delayed recipe checks; keep old hook signature working.
+		FindRecipes();
+	}
+
 	[Obsolete($"Replaced by {nameof(IngredientQuantityRules)} due to not accounting for shimmer decrafting")]
 	public static class ConsumptionRules
 	{

@@ -5550,15 +5550,17 @@ public partial class Player : Entity, IFixLoadedData
 		*/
 	}
 
-	public void QuickSpawnItem(IEntitySource source, int item, int stack = 1)
+	public int QuickSpawnItem(IEntitySource source, int item, int stack = 1)
 	{
 		if (stack > 0) {
 			Item item2 = new Item();
 			item2.SetDefaults(item);
 			item2.Prefix(-1);
 			item2.stack = stack;
-			QuickSpawnItem(source, item2);
+			return QuickSpawnItem(source, item2, stack);
 		}
+
+		return -1;
 	}
 
 	public void QuickSpawnItem(IEntitySource source, Item item)
@@ -36651,7 +36653,7 @@ public partial class Player : Entity, IFixLoadedData
 		if (itemAnimation > 0)
 			ItemCheck_ApplyUseStyle(mountOffset, item, drawHitbox);
 		else
-			ItemCheck_ApplyHoldStyle(mountOffset, item, drawHitbox);
+			ItemCheck_ApplyHoldStyle_Inner(mountOffset, item, drawHitbox);
 
 		return drawHitbox;
 	}
@@ -42889,6 +42891,12 @@ public partial class Player : Entity, IFixLoadedData
 		}
 	}
 
+	[Obsolete("Compatibility shim for hooks targeting the old method name.")]
+	private void ItemCheck_ApplyHoldStyle_Inner(float mountOffset, Item sItem, Rectangle heldItemFrame)
+	{
+		ItemCheck_ApplyHoldStyle(mountOffset, sItem, heldItemFrame);
+	}
+
 	private void ItemCheck_ApplyManaRegenDelay(Item sItem)
 	{
 		if (!spaceGun || (sItem.type != 127 && sItem.type != 4347 && sItem.type != 4348 && sItem.type != 514))
@@ -43555,7 +43563,7 @@ public partial class Player : Entity, IFixLoadedData
 		else if (sItem.useStyle == 16) {
 			bool flag2 = pulley;
 			pulley = false;
-			ItemCheck_ApplyHoldStyle(mountOffset, sItem, heldItemFrame);
+			ItemCheck_ApplyHoldStyle_Inner(mountOffset, sItem, heldItemFrame);
 			pulley = flag2;
 		}
 	}
