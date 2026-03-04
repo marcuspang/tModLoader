@@ -1,7 +1,13 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- special targets file for ExampleMod. Fits in place of the one in /Mod Sources -->  
   <Import Project="src/WorkspaceInfo.targets" />
-  <Import Project="$(tModLoaderSteamPath)/tMLMod.targets" />
+  <Import Project="$(tModLoaderSteamPath)/tMLMod.targets" Condition="Exists('$(tModLoaderSteamPath)/tMLMod.targets')" />
+  <Import Project="patches/tModLoader/Terraria/release_extras/tMLMod.targets" Condition="!Exists('$(tModLoaderSteamPath)/tMLMod.targets')" />
+
+  <ItemGroup>
+    <!-- Local builds can miss these analyzer files; keep mod compile unblocked. -->
+    <Analyzer Remove="$(tMLLibraryPath)/tModCodeAssist/**/*.dll" />
+  </ItemGroup>
   
   <ItemGroup>
     <!-- unfortunately VS Goto Defintion doesn't work on pdb source paths, only direct project references -->

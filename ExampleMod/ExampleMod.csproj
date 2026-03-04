@@ -4,6 +4,8 @@
   <PropertyGroup>
     <AssemblyName>ExampleMod</AssemblyName>
     <LangVersion>latest</LangVersion>
+    <!-- Keep solution builds deterministic; run mod packaging only when explicitly requested with /p:BuildMod=true -->
+    <BuildMod>false</BuildMod>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Old\**" />

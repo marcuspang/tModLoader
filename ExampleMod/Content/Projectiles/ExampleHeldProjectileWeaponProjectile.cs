@@ -19,7 +19,6 @@ namespace ExampleMod.Content.Projectiles
 
 		public override void SetStaticDefaults() {
 			Main.projFrames[Type] = 6;
-			ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
 		}
 
 		public override void SetDefaults() {
@@ -86,7 +85,7 @@ namespace ExampleMod.Content.Projectiles
 
 			if (shouldShootArrow && Main.myPlayer == Projectile.owner) {
 				Item heldItem = player.HeldItem;
-				if (player.channel && player.HasAmmo(heldItem) && !player.noItems && !player.CCed) {
+				if (player.channel && player.HasAmmo(heldItem, true) && !player.noItems && !player.CCed) {
 					float holdoutDistance = ExampleHeldProjectileWeapon.HoldoutDistance * Projectile.scale;
 					Vector2 holdoutOffset = holdoutDistance * Vector2.Normalize(Main.MouseWorld - playerCenter);
 					if (holdoutOffset.X != Projectile.velocity.X || holdoutOffset.Y != Projectile.velocity.Y) {

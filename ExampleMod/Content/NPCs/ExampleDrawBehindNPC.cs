@@ -116,7 +116,7 @@ namespace ExampleMod.Content.NPCs
 					if (player.talkNPC != NPC.whoAmI && !player.tileInteractionHappened) {
 						if (player.HasItem(keyItem) && player.ConsumeItem(keyItem)) {
 							SoundEngine.PlaySound(SoundID.Item14); // The bomb explosion sound
-							NPC.SimpleStrikeNPC(1000, 0);
+							NPC.StrikeNPC(1000, 0f, 0);
 						}
 						else {
 							SoundEngine.PlaySound(SoundID.MenuClose);

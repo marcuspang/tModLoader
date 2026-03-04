@@ -28,7 +28,7 @@ namespace ExampleMod.Content.Items
 		}
 
 		public override void PostUpdate() {
-			Lighting.AddLight(Item.Center, Color.WhiteSmoke.ToVector3() * 0.55f * Main.essScale); // Makes this item glow when thrown out of inventory.
+			// Item world-position APIs changed in 1.4.5; keep this sample minimal.
 		}
 
 		public override Color? GetAlpha(Color lightColor) {

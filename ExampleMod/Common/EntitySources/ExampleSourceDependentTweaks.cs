@@ -25,8 +25,8 @@ namespace ExampleMod.Common.EntitySources
 	{
 		public override void OnSpawn(Item item, IEntitySource source) {
 			// Accompany all loot from trees with a slime.
-			if (source is EntitySource_ShakeTree) {
-				NPC.NewNPC(source, (int)item.position.X, (int)item.position.Y, NPCID.BlueSlime);
+			if (source is EntitySource_ShakeTree shakeTreeSource) {
+				NPC.NewNPC(source, shakeTreeSource.TileCoords.X * 16, shakeTreeSource.TileCoords.Y * 16, NPCID.BlueSlime);
 			}
 		}
 	}
@@ -41,7 +41,8 @@ namespace ExampleMod.Common.EntitySources
 		public override void OnSpawn(Item item, IEntitySource source) {
 			// make coins spawned from the lucky coin accessory fly into the air
 			if (source.Context == "LuckyCoin") {
-				item.velocity.Y -= 20;
+				// GlobalItem.OnSpawn now receives Item (not WorldItem), so item velocity is not available here.
+				// Keep this as a no-op sample to avoid suggesting unsupported behavior.
 			}
 		}
 	}

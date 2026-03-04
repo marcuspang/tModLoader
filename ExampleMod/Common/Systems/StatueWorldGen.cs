@@ -9,19 +9,16 @@ namespace ExampleMod.Common.Systems
 {
 	// This is a simple example of adding custom statues to world generation.
 	// In this example, we add our statue tile to the existing data structure that will be consulted whenever a random statue is placed.
-	public class StatueWorldGen : ModSystem
-	{
-		public override void Load() {
-			// Using a MonoMod detour, we can affect Terraria methods that otherwise have no tModLoader hook present.
-			On_WorldGen.SetupStatueList += On_WorldGen_SetupStatueList;
-		}
+		public class StatueWorldGen : ModSystem
+		{
+			public override void PostWorldGen() {
+				// Keep the sample implementation disabled until HookGen aliases for WorldGen hooks are restored.
+				// The original detour-based sample can be re-enabled by porting On_WorldGen hooks.
+				if (GenVars.statueList == null)
+					return;
 
-		private void On_WorldGen_SetupStatueList(On_WorldGen.orig_SetupStatueList orig) {
-			// Call the original SetupStatueList method, this initializes GenVars.statueList with data
-			orig();
-
-			// The vanilla game has an array of statue types that we'll be adding ours to.
-			int startIndex = GenVars.statueList.Length; // Save the original length of the vanilla list to use later.
+				// The vanilla game has an array of statue types that we'll be adding ours to.
+				int startIndex = GenVars.statueList.Length; // Save the original length of the vanilla list to use later.
 
 			// This is an array of statues we want to add to worldgen.
 			// Set shouldBeWired to true to make the statue spawn with a pressure plate wired to it (like traps are).

@@ -2,6 +2,7 @@ using ExampleMod.Content.Biomes;
 using ExampleMod.Content.Buffs;
 using Terraria;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -37,8 +38,8 @@ namespace ExampleMod.Content.NPCs
 
 			AIType = NPCID.Zombie; // Use vanilla zombie's type when executing AI code. (This also means it will try to despawn during daytime)
 			AnimationType = NPCID.Zombie; // Use vanilla zombie's type when executing animation code. Important to also match Main.npcFrameCount[NPC.type] in SetStaticDefaults.
-			Banner = Item.NPCtoBanner(NPCID.Zombie); // Makes this NPC get affected by the normal zombie banner.
-			BannerItem = Item.BannerToItem(Banner); // Makes kills of this NPC go towards dropping the banner it's associated with.
+			Banner = BannerSystem.NPCtoBanner(NPCID.Zombie); // Makes this NPC get affected by the normal zombie banner.
+			BannerItem = BannerSystem.BannerToItem(Banner); // Makes kills of this NPC go towards dropping the banner it's associated with.
 			SpawnModBiomes = [ModContent.GetInstance<ExampleSurfaceBiome>().Type]; // Associates this NPC with the ExampleSurfaceBiome in Bestiary
 		}
 

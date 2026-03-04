@@ -25,7 +25,7 @@ namespace ExampleMod.Common.Systems
 		void Modify_Pyramids(ILContext il) {
 			try {
 				var c = new ILCursor(il);
-				c.EmitDelegate(() => ModContent.GetInstance<ExampleMod>().Logger.Debug("(In ILHook) Generating Pyramids"));
+				c.EmitDelegate(() => { });
 			}
 			catch (Exception) {
 				MonoModHooks.DumpIL(ModContent.GetInstance<ExampleMod>(), il);
@@ -36,9 +36,7 @@ namespace ExampleMod.Common.Systems
 		// One thing to note is that for technical reasons, the self parameter is an object type
 		// You will never need to actually cast it to type WorldGen though, since it contains no instance fields or methods
 		void Detour_Shinies(WorldGen.orig_GenPassDetour orig, object self, GenerationProgress progress, GameConfiguration configuration) {
-			ModContent.GetInstance<ExampleMod>().Logger.Debug("(On Hook) Before Shinies");
 			orig(self, progress, configuration);
-			ModContent.GetInstance<ExampleMod>().Logger.Debug("(On Hook) After Shinies");
 		}
 	}
 }

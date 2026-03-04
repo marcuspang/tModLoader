@@ -36,7 +36,6 @@ namespace ExampleMod.Content.Projectiles
 		}
 
 		public override void SetStaticDefaults() {
-			ProjectileID.Sets.DontAttachHideToAlpha[Type] = true;
 		}
 
 		public override void SetDefaults() {

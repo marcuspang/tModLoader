@@ -27,7 +27,7 @@ namespace ExampleMod.Content.Tiles.Furniture
 			TileObjectData.newTile.CoordinateHeights = [18];
 			TileObjectData.addTile(Type);
 
-			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTableTypes);
 
 			// Etc
 			LocalizedText name = CreateMapEntryName();

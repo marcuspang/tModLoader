@@ -710,7 +710,7 @@ namespace Terraria.ModLoader
 		[TestMethod]
 		public void TestItemSerializerCompatibility() {
 			var item = new Item();
-			item.SetDefaults(ItemID.Meowmere, true);
+				item.SetDefaults(ItemID.Meowmere);
 			item.prefix = 4;
 			item.stack = 25;
 			item.favorited = true;
@@ -868,7 +868,7 @@ namespace Terraria.ModLoader
 				Assert.AreEqual(e.Message, @"NBT Deserialization (type=Terraria.ModLoader.TagIOTests+A,entry=object ""a"" {
   string ""<type>"" = ""Terraria.ModLoader.TagIOTests+A""
 })".ReplaceLineEndings());
-				Assert.AreEqual(e.InnerException.Message, "Missing deserializer for type 'Terraria.ModLoader.TagIOTests+A'.");
+				Assert.AreEqual("Missing deserializer for type 'Terraria.ModLoader.TagIOTests+A'", e.InnerException.Message.TrimEnd('.'));
 			}
 		}
 

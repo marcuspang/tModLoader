@@ -31,7 +31,7 @@ namespace Terraria.ModLoader.Setup.Core
 			public TerrariaAssemblyResolver(PEFile baseModule, string targetFramework, IEnumerable<string> extraSearchDirs)
 			{
 				this.baseModule = baseModule;
-				// pass mainAssemblyFileName: null so we can control the order of the search paths. We need to search the framework directory before the Terraria.exe folder on Mono platforms 
+				// pass mainAssemblyFileName: null so we can control the order of the search paths. We need to search the framework directory before the Terraria.exe folder on Mono platforms
 				_resolver = new UniversalAssemblyResolver(mainAssemblyFileName: null, throwOnError: true, targetFramework, streamOptions: PEStreamOptions.PrefetchMetadata);
 
 				foreach (var dir in extraSearchDirs)

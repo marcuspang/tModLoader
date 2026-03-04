@@ -70,7 +70,6 @@ namespace ExampleMod
 					ExampleCustomUseStylePlayer.ReceiveDirection(reader, whoAmI);
 					break;
 				default:
-					Logger.WarnFormat("ExampleMod: Unknown Message type: {0}", msgType);
 					break;
 			}
 		}

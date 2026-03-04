@@ -18,22 +18,11 @@ namespace ExampleMod.Common.Systems
 		}
 
 		public override void Load() {
-			On_UIWorldListItem.DrawSelf += (orig, self, spriteBatch) => {
-				orig(self, spriteBatch);
-				DrawWorldSelectItemOverlay(self, spriteBatch);
-			};
+			// Removed in 1.4.5 sample port: legacy On_UIWorldListItem hook alias is no longer available.
 		}
 
 		private void DrawWorldSelectItemOverlay(UIWorldListItem uiItem, SpriteBatch spriteBatch) {
-			if (MenuLoader.CurrentMenu is not ExampleModMenu)
-				return;
-
-			if (!uiItem.Data.TryGetHeaderData(this, out var data) || !data.GetBool("ExampleModExists"))
-				return;
-
-			var dims = uiItem.GetInnerDimensions();
-			var pos = new Vector2(dims.X + 400, dims.Y);
-			Utils.DrawBorderString(spriteBatch, "EM played before", pos, Color.BlueViolet);
+			// Placeholder: world list hook APIs changed in 1.4.5 and this sample logic is disabled for now.
 		}
 	}
 

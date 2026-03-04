@@ -76,9 +76,9 @@ namespace ExampleMod.Content.Items
 			// AddCustomShimmerResult can be used to change the decrafting results. Rather that return 1 ExampleItem, decrafting this item will return 1 Rotten Egg and 3 Chain.
 			CreateRecipe()
 				.AddIngredient<ExampleItem>()
+				.AddIngredient(ItemID.RottenEgg)
+				.AddIngredient(ItemID.Chain, 3)
 				.AddTile<Tiles.Furniture.ExampleWorkbench>()
-				.AddCustomShimmerResult(ItemID.RottenEgg)
-				.AddCustomShimmerResult(ItemID.Chain, 3)
 				.Register();
 		}
 	}
